@@ -1,0 +1,114 @@
+{
+  "titulo": "El barco que apareció sin nadie a bordo",
+  "formato": "horizontal",
+  "estilo_visual": "2D stick figure cartoon animation, simple black stick-figure characters with round heads and expressive faces, thick clean outlines, flat colors, minimal hand-drawn backgrounds, explainer video style",
+  "video": {
+    "modelo": "veo-3.1-lite-generate-preview",
+    "resolucion": "720p"
+  },
+  "voz": {
+    "voz": "Charon",
+    "indicaciones": "Narra en español latino neutro, con tono de misterio, cercano y a ritmo ágil"
+  },
+  "gancho": {
+    "texto": "Un barco intacto… *sin nadie a bordo*",
+    "duracion": 3
+  },
+  "escenas": [
+    {
+      "id": "e01",
+      "tipo": "video",
+      "prompt": "A simple cartoon two-masted sailing ship drifting alone on a flat blue-grey sea, torn sails flapping in the wind, nobody on deck, slow side tracking view",
+      "narracion": "En diciembre de 1872, un barco apareció a la deriva cerca de las Azores.",
+      "sacudida": false
+    },
+    {
+      "id": "e02",
+      "tipo": "video",
+      "prompt": "Three stick figure sailors row a small boat up to a silent sailing ship, climb aboard and look around the empty deck with confused faces",
+      "narracion": "Los marinos que lo encontraron subieron a bordo. No había nadie.",
+      "texto": "Mary Celeste"
+    },
+    {
+      "id": "e03",
+      "tipo": "video",
+      "prompt": "Inside a simple cartoon ship cabin: folded clothes on a bunk, belongings on a small wooden desk and an oil lamp swinging gently, no one there, slow pan",
+      "narracion": "Ropa, pertenencias y comida para seis meses seguían en su lugar."
+    },
+    {
+      "id": "e04",
+      "tipo": "imagen",
+      "prompt": "A stick figure sailor holding a lantern inspects long rows of wooden barrels in a ship's dark cargo hold",
+      "narracion": "La carga, 1.701 barriles de alcohol, estaba casi intacta.",
+      "efecto": "paneo_der",
+      "dato": {
+        "valor": "1.701",
+        "etiqueta": "barriles de alcohol"
+      }
+    },
+    {
+      "id": "e05",
+      "tipo": "video",
+      "prompt": "A surprised stick figure sailor points at empty ropes hanging on the side of a sailing ship where the lifeboat should be, simple sea background, slow push-in",
+      "narracion": "Faltaban el bote salvavidas y los instrumentos de navegación."
+    },
+    {
+      "id": "e06",
+      "tipo": "imagen",
+      "prompt": "A stick figure family on the deck of a sailing ship: a captain with a cap, his wife in a long dress and their little daughter holding her hand, all smiling",
+      "narracion": "A bordo iban diez personas, entre ellas el capitán, su esposa y su hija de dos años.",
+      "efecto": "zoom_in",
+      "dato": {
+        "valor": "10",
+        "etiqueta": "personas desaparecidas"
+      }
+    },
+    {
+      "id": "e07",
+      "tipo": "video",
+      "prompt": "A tiny lifeboat with stick figures rowing into thick fog on a flat grey sea, slowly disappearing, sad and mysterious mood, slow pull back",
+      "narracion": "Nunca se encontró a ninguno de ellos, y nadie sabe qué pasó realmente."
+    },
+    {
+      "id": "e08",
+      "tipo": "imagen",
+      "prompt": "A stick figure writer with a big mustache writes at a desk by candlelight, a thought bubble above his head shows a ghost ship under the moon",
+      "narracion": "Años después, un cuento de Arthur Conan Doyle, el creador de Sherlock Holmes, lo volvió leyenda.",
+      "efecto": "zoom_out"
+    }
+  ],
+  "cierre": {
+    "texto": "Cosas que pasan",
+    "subtexto": "Suscríbete para más historias reales",
+    "duracion": 3
+  },
+  "miniatura": {
+    "texto": "Apareció *sin nadie* a bordo",
+    "escena": "e01"
+  },
+  "shorts": [
+    {
+      "titulo": "¿Dónde está la tripulación del Mary Celeste?",
+      "escenas": [
+        "e01",
+        "e02",
+        "e03",
+        "e07"
+      ],
+      "gancho": "¿Dónde está la *tripulación*?",
+      "encuadre": "recorte"
+    }
+  ],
+  "metadata": {
+    "descripcion": "En diciembre de 1872, la tripulación del Dei Gratia encontró al Mary Celeste a la deriva cerca de las Azores: el barco estaba en buen estado, con su carga y comida para meses, pero sin nadie a bordo. Las diez personas que viajaban en él nunca aparecieron.\n\nFuentes: Encyclopaedia Britannica, Smithsonian Magazine, History.com, Royal Museums Greenwich.",
+    "etiquetas": [
+      "cosas que pasan",
+      "Mary Celeste",
+      "barco fantasma",
+      "misterios",
+      "historia",
+      "1872",
+      "misterios del mar"
+    ]
+  }
+}

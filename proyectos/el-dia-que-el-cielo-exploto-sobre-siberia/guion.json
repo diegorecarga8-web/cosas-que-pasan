@@ -1,7 +1,7 @@
 {
   "titulo": "El día que el cielo explotó sobre Siberia",
   "formato": "horizontal",
-  "estilo_visual": "cinematic historical documentary, realistic, early 20th century atmosphere, natural light, muted earthy colors, subtle film grain",
+  "estilo_visual": "2D stick figure cartoon animation, simple black stick-figure characters with round heads and expressive faces, thick clean outlines, flat colors, minimal hand-drawn backgrounds, explainer video style",
   "video": {
     "modelo": "veo-3.1-lite-generate-preview",
     "resolucion": "720p"
@@ -53,13 +53,13 @@
     {
       "id": "e05",
       "tipo": "video",
-      "prompt": "A European city street at midnight in 1908, the night sky glowing with a strange pale silvery light, a man in a coat reads a newspaper by the glow of the sky, gas lamps along the empty street, slow dolly in",
+      "prompt": "A stick figure man in a coat and hat reads a newspaper in a city street at midnight while the night sky glows with a strange pale light, gas lamps along the street, slow dolly in",
       "narracion": "Durante varias noches, en Londres se podía leer el diario a medianoche."
     },
     {
       "id": "e06",
       "tipo": "imagen",
-      "prompt": "Old 1920s scientific expedition camp with canvas tents in a devastated Siberian forest, dead trees standing like poles without branches, vintage black and white photograph style",
+      "prompt": "Stick figure scientists with backpacks and a tent stand among dead trees without branches in a devastated forest, scratching their heads, no crater anywhere",
       "narracion": "Casi veinte años después, la primera expedición no encontró ningún cráter.",
       "efecto": "paneo_der",
       "texto": "1927"

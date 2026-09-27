@@ -106,12 +106,20 @@ Reglas:
 
 ## Reglas para el guion
 
+- **Antes de escribir, pregunta el tema** (y formato y duración si no los dijo). No elijas el tema por tu cuenta.
+- **Estilo del canal: stick man.** Todos los videos van con monigotes (stick figures) en animación 2D simple.
+  Usa siempre este `estilo_visual` (salvo que el usuario pida otro):
+  `2D stick figure cartoon animation, simple black stick-figure characters with round heads and expressive
+  faces, thick clean outlines, flat colors, minimal hand-drawn backgrounds, explainer video style`.
+  En cada prompt nombra a las personas como stick figures ("a stick figure sailor", "a stick figure captain
+  with a cap") con poses y caras expresivas, y fondos simples. Como monigotes se pueden mostrar personajes
+  históricos (sin nombres escritos). El `evitar` por defecto ya excluye lo fotorrealista y el 3D.
 - **Estructura:** gancho fuerte en los primeros 2–3 s → contexto → escalada → revelación → cierre.
   45–70 s para el video principal; los shorts toman 2–4 escenas (15–35 s) con su propio `gancho`.
 - **Narración** (español, frases cortas, una idea por escena). A ~2.6 palabras/s: ≤9 palabras para un clip
   de 4 s, ≤14 para 6 s, ≤19 para 8 s. Si no pones `duracion`, se elige sola según la narración.
-- **Prompts visuales en inglés**, concretos: sujeto + acción + lugar + movimiento de cámara + luz.
-  Sin texto, logos ni personas reales. Describe igual a los personajes que se repiten (o usa `referencias`).
+- **Prompts visuales en inglés**, concretos: sujeto + acción + lugar + movimiento de cámara.
+  Sin texto ni logos. Describe igual a los personajes que se repiten (o usa `referencias`).
   El `estilo_visual` común se agrega solo a cada prompt; no lo repitas.
 - **Imagen vs video:** usa `"tipo": "imagen"` (con zoom/paneo) para planos estáticos, lugares y objetos, y
   reserva `"video"` para acción y movimiento real. En modo navegador ahorra cuota del plan; en modo api,

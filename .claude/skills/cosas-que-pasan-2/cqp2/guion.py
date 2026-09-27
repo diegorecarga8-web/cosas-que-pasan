@@ -24,7 +24,7 @@ MODELO_IMAGEN = "gemini-3.1-flash-image"
 MODELO_VOZ = "gemini-3.1-flash-tts-preview"
 VOZ = "Charon"
 INDICACIONES_VOZ = "Narra en español latino neutro, con tono intrigante y cercano, a ritmo ágil"
-EVITAR = "on-screen text, subtitles, captions, letters, watermark, logo, distorted faces, extra fingers"
+EVITAR = "on-screen text, subtitles, captions, letters, watermark, logo, photorealistic, 3D render, realistic humans"
 COLOR_ACENTO = "#FFD23F"
 
 
