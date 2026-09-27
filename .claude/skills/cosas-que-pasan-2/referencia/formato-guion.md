@@ -15,7 +15,7 @@ Ejemplo completo: [`plantillas/guion_ejemplo.json`](../plantillas/guion_ejemplo.
 | `video.modelo` | texto | `veo-3.1-lite-generate-preview` | Otras opciones: `veo-3.1-fast-generate-preview`, `veo-3.1-generate-preview`. |
 | `video.resolucion` | `720p` \| `1080p` \| `4k` | `720p` | Resolución de Veo (el montaje final siempre sale a 1080p). |
 | `imagen.modelo` | texto | `gemini-3.1-flash-image` | Modelo para las escenas de tipo imagen. |
-| `voz.activar` | sí/no | sí si hay narración | Genera la voz de la narración. |
+| `voz.activar` | sí/no | sí si hay narración | Genera la voz de la narración. Sin voz, la narración se muestra como subtítulos. |
 | `voz.modelo` | texto | `gemini-3.1-flash-tts-preview` | Modelo de voz (TTS). |
 | `voz.voz` | texto | `Charon` | Voz prediseñada de Gemini (p. ej. `Kore`, `Puck`, `Charon`, `Fenrir`, `Aoede`, `Orus`, `Sulafat`). |
 | `voz.indicaciones` | texto | narración intrigante, ritmo ágil | Cómo debe sonar la voz (se antepone al texto, en lenguaje natural). |
@@ -63,7 +63,7 @@ Ejemplo completo: [`plantillas/guion_ejemplo.json`](../plantillas/guion_ejemplo.
 ```
 proyectos/<slug>/
   guion.json          ← lo escribe Claude
-  clips/  imagenes/   ← modo app: tus archivos (e01.mp4, e03.png…)
+  clips/  imagenes/   ← modo navegador/app: clips e imágenes de la app de Gemini (e01.mp4, e03.png…)
   voz/                ← opcional: tu propia grabación (e01.wav…)
   assets/             ← lo generado por la API (caché; fuera de git por defecto)
   render/             ← intermedios (se pueden borrar)

@@ -1,18 +1,24 @@
 # Conectar Cosas que pasan 2 con Gemini
 
+**¿Necesito clave?** No para el modo navegador: Claude usa tu Chrome del PC, donde ya tienes iniciada tu
+cuenta de Google con el plan, y genera los clips en la app de Gemini (igual que la v1 con Flow). La clave
+solo hace falta para el modo api (automático, sin navegador, también desde la nube). Esta guía es para ese
+modo.
+
 ## Primero, lo importante: plan vs. API
 
 - **Tu plan Google AI Pro** ("Gemini Pro") sirve dentro de la app de Gemini y de Flow. Para video **no es
   ilimitado**: desde I/O 2026 la app usa una cuota de cómputo que se renueva cada 5 horas hasta un tope
-  semanal, y generar video gasta bastante de esa cuota. Esa cuota no se puede usar desde un programa.
+  semanal, y generar video gasta bastante de esa cuota. Esa cuota no se usa por API: solo desde la app
+  (a mano o con Claude manejando tu navegador, que es el modo navegador).
 - **La API de Gemini** es lo que usa este pipeline para generar solo (Veo, imágenes y voz). Se cobra
   aparte, por uso. A cambio es automática, corre en la nube sin tu PC y no gasta tus límites de Claude
   manejando un navegador.
 - **Puente entre ambos:** el plan Google AI Pro incluye US$10 al mes en créditos de Google Cloud (vía el
   Google Developer Program) que se pueden aplicar al uso de la API. Con Veo 3.1 Lite a 720p eso son
   ~200 s de video al mes.
-- **Sin pagar API:** el modo app (`--videos app`) usa la cuota de tu plan: generas los clips en la app de
-  Gemini con la hoja de prompts y el pipeline hace el montaje.
+- **Sin pagar API:** el modo navegador (`--navegador`) usa la cuota de tu plan: Claude genera los clips en
+  la app de Gemini con tu sesión (o los generas tú con la hoja de `prompts`) y el pipeline hace el montaje.
 
 ## 1. Crear la clave
 

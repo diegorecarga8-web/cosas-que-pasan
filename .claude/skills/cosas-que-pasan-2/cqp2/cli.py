@@ -7,6 +7,11 @@
   python cqp.py render   proyectos/<slug>/guion.json [--borrador]
   python cqp.py todo     proyectos/<slug>/guion.json --confirmar
   python cqp.py prompts  proyectos/<slug>/guion.json   (hoja para el modo app)
+
+Modo navegador (sin clave, desde el PC con tu sesión de Google, como la v1 con Flow):
+  python cqp.py siguiente proyectos/<slug>/guion.json      (qué escena toca y su prompt)
+  python cqp.py recoger   proyectos/<slug>/guion.json e01  (mueve la descarga a clips/)
+  python cqp.py render    proyectos/<slug>/guion.json --navegador
 """
 
 from __future__ import annotations
@@ -14,12 +19,14 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import shutil
 import sys
+import time
 from pathlib import Path
 
 from . import __version__, medios, precios
 from .guion import FORMATOS, ErrorGuion, cargar, estimar_narracion, slugificar
-from .recursos import ErrorRecursos, FaltaConfirmar, Modos, Recursos
+from .recursos import EXT_IMAGEN, EXT_VIDEO, ErrorRecursos, FaltaConfirmar, Modos, Recursos, hay_clave_api
 
 PLANTILLA = Path(__file__).resolve().parent.parent / "plantillas" / "guion_ejemplo.json"
 
@@ -44,16 +51,34 @@ def _cargar_env(ruta: Path) -> None:
 def _modos(args) -> Modos:
     if getattr(args, "simulado", False):
         return Modos.simulado()
-    return Modos(videos=args.videos, imagenes=args.imagenes, voz=args.voz)
+    if getattr(args, "navegador", False):
+        # sin clave: todo sale de la app de Gemini; la voz por API solo si hay clave (cuesta centavos)
+        return Modos(videos="app", imagenes="app", voz=args.voz if args.voz != "api" or hay_clave_api() else "no")
+    alias = {"navegador": "app"}  # el modo navegador usa los mismos archivos que el modo app
+    return Modos(videos=alias.get(args.videos, args.videos), imagenes=alias.get(args.imagenes, args.imagenes), voz=args.voz)
 
 
-def _agregar_modos(p: argparse.ArgumentParser) -> None:
+def _agregar_modos(p: argparse.ArgumentParser, videos: str = "api", imagenes: str = "api") -> None:
     g = p.add_argument_group("de dónde salen los recursos")
-    g.add_argument("--videos", choices=("api", "app", "simulado"), default="api",
-                   help="api: Veo por la API de Gemini · app: clips que dejas en clips/ · simulado: marcadores gratis")
-    g.add_argument("--imagenes", choices=("api", "app", "simulado"), default="api")
-    g.add_argument("--voz", choices=("api", "simulado", "no"), default="api")
+    g.add_argument("--videos", choices=("api", "navegador", "app", "simulado"), default=videos,
+                   help="api: Veo por la API de Gemini · navegador/app: clips hechos en la app de Gemini, en clips/ · "
+                        "simulado: marcadores gratis")
+    g.add_argument("--imagenes", choices=("api", "navegador", "app", "simulado"), default=imagenes)
+    g.add_argument("--voz", choices=("api", "simulado", "no"), default="api",
+                   help="sin voz, la narración se muestra como subtítulos")
+    g.add_argument("--navegador", action="store_true",
+                   help="sin clave: videos e imágenes de la app de Gemini con tu sesión de Google (como la v1 con Flow)")
     g.add_argument("--simulado", action="store_true", help="todo simulado: vista previa gratis sin API")
+
+
+def _descargas() -> Path:
+    propia = os.environ.get("CQP2_DESCARGAS")
+    if propia:
+        return Path(propia).expanduser()
+    for nombre in ("Downloads", "Descargas"):
+        if (Path.home() / nombre).is_dir():
+            return Path.home() / nombre
+    return Path.home() / "Downloads"
 
 
 def cmd_nuevo(args) -> int:
@@ -120,6 +145,68 @@ def cmd_prompts(args) -> int:
     g = cargar(args.guion)
     ruta = hoja_prompts(g, Recursos(g, _modos(args)), _dir_entrega(g))
     print(f"Hoja de prompts para la app de Gemini: {ruta}")
+    return 0
+
+
+def _pendientes_app(g, r: Recursos) -> list:
+    return [e for e in g.escenas
+            if (e.tipo == "video" and r.modos.videos == "app" and not r.video(e))
+            or (e.tipo == "imagen" and r.modos.imagenes == "app" and not r.imagen(e))]
+
+
+def cmd_siguiente(args) -> int:
+    from .entrega import prompt_app
+
+    g = cargar(args.guion)
+    r = Recursos(g, _modos(args))
+    pendientes = _pendientes_app(g, r)
+    if not pendientes:
+        print("Nada pendiente: ya están todos los clips e imágenes de la app de Gemini.")
+        print(f"Siguiente paso: python {Path(sys.argv[0]).as_posix()} render {args.guion} --navegador")
+        return 0
+    e = pendientes[0]
+    carpeta, ext = ("clips", "mp4") if e.tipo == "video" else ("imagenes", "png")
+    herramienta = "la herramienta Video" if e.tipo == "video" else "el chat normal (genera imágenes)"
+    print(f"Pendiente 1 de {len(pendientes)}: {e.id} ({e.tipo}) → {g.dir.name}/{carpeta}/{e.id}.{ext}")
+    print(f"En gemini.google.com/app: chat nuevo → {herramienta} → pega este prompt tal cual:\n")
+    print(prompt_app(g, e))
+    print(f"\nCuando termine la descarga: python {Path(sys.argv[0]).as_posix()} recoger {args.guion} {e.id}")
+    return 0
+
+
+def cmd_recoger(args) -> int:
+    g = cargar(args.guion)
+    try:
+        e = g.escena(args.escena)
+    except KeyError:
+        raise ErrorGuion(f"No existe la escena {args.escena}") from None
+    es_video = e.tipo == "video"
+    if args.archivo:
+        archivo = Path(args.archivo).expanduser()
+        if not archivo.is_file():
+            raise ErrorRecursos(f"No existe {archivo}")
+    else:
+        origen = Path(args.desde).expanduser() if args.desde else _descargas()
+        if not origen.is_dir():
+            raise ErrorRecursos(f"No existe la carpeta de descargas {origen} (indícala con --desde)")
+        limite = time.time() - args.minutos * 60
+        extensiones = EXT_VIDEO if es_video else EXT_IMAGEN
+        candidatos = [p for p in origen.iterdir()
+                      if p.is_file() and p.suffix.lower() in extensiones and p.stat().st_mtime >= limite]
+        if not candidatos:
+            raise ErrorRecursos(f"No encontré {'videos' if es_video else 'imágenes'} descargados en {origen} en los "
+                                f"últimos {args.minutos} min. ¿Terminó la descarga? (o usa --archivo)")
+        archivo = max(candidatos, key=lambda p: p.stat().st_mtime)
+    carpeta = g.dir / ("clips" if es_video else "imagenes")
+    carpeta.mkdir(parents=True, exist_ok=True)
+    for viejo in carpeta.glob(f"{e.id}.*"):
+        viejo.unlink()
+    destino = carpeta / f"{e.id}{archivo.suffix.lower()}"
+    shutil.move(str(archivo), str(destino))
+    detalle = ""
+    if es_video:
+        detalle = f" ({medios.duracion(destino):.1f} s, {'con' if medios.tiene_audio(destino) else 'sin'} audio)"
+    print(f"{archivo.name} → {destino}{detalle}")
     return 0
 
 
@@ -197,6 +284,19 @@ def main(argv: list[str] | None = None) -> int:
     sp.add_argument("guion")
     _agregar_modos(sp)
     sp.set_defaults(func=cmd_prompts)
+
+    sp = sub.add_parser("siguiente", help="modo navegador: próxima escena a generar en la app de Gemini y su prompt")
+    sp.add_argument("guion")
+    _agregar_modos(sp, videos="navegador", imagenes="navegador")
+    sp.set_defaults(func=cmd_siguiente)
+
+    sp = sub.add_parser("recoger", help="modo navegador: mueve la última descarga a clips/ o imagenes/ de una escena")
+    sp.add_argument("guion")
+    sp.add_argument("escena", help="id de la escena, p. ej. e01")
+    sp.add_argument("--desde", help="carpeta de descargas (por defecto ~/Downloads o CQP2_DESCARGAS)")
+    sp.add_argument("--archivo", help="archivo exacto a usar en vez del más reciente")
+    sp.add_argument("--minutos", type=float, default=30, help="solo descargas de los últimos N minutos")
+    sp.set_defaults(func=cmd_recoger)
 
     for nombre, ayuda, func in (("generar", "genera videos, imágenes y voz que falten", cmd_generar),
                                 ("render", "arma el video principal, shorts, miniatura y metadata", cmd_render),

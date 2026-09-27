@@ -49,6 +49,7 @@ def prompt_app(g: Guion, e) -> str:
     formato = "Vertical 9:16 video." if g.formato == "vertical" else "Horizontal 16:9 video."
     if e.tipo == "imagen":
         formato = "Vertical 9:16 image." if g.formato == "vertical" else "Horizontal 16:9 image."
+        return f"Generate an image: {g.prompt_visual(e)} {formato} Avoid: {g.evitar}."
     return f"{g.prompt_visual(e)} {formato} Avoid: {g.evitar}."
 
 

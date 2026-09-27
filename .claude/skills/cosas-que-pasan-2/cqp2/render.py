@@ -14,9 +14,9 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from . import medios
-from .guion import Escena, Guion
+from .guion import Escena, Guion, estimar_narracion
 from .recursos import Recursos
-from .subtitulos import Documento
+from .subtitulos import Documento, sin_marcas
 
 FPS = 30
 VERSION_SEGMENTOS = 2  # súbela si cambia cómo se renderiza un segmento, para invalidar la caché
@@ -36,6 +36,7 @@ class Tramo:
     duracion: float
     sacudida: bool
     inicio: float = 0.0
+    dur_texto: float = 0.0  # tiempo de los subtítulos: la voz o, sin voz, lo que toma leer la narración
 
 
 def _par(n: float) -> int:
@@ -73,31 +74,35 @@ class Montaje:
     def tramos(self, ids: list[str] | None = None, gancho: bool = False) -> list[Tramo]:
         escenas = [self.g.escena(i) for i in ids] if ids else list(self.g.escenas)
         faltan = [f"{e.id} ({e.tipo})" for e in escenas if not self.r.fuente_visual(e)]
+        faltan += [f"{e.id} (voz)" for e in escenas
+                   if e.narracion and self.g.voz_activa and self.r.modos.voz != "no" and not self.r.voz(e)]
         if faltan:
-            raise ErrorRender("Faltan recursos visuales para: " + ", ".join(faltan) +
-                              "\nEjecuta 'generar' (o deja los archivos del modo app) antes de renderizar.")
+            raise ErrorRender("Faltan recursos para: " + ", ".join(faltan) +
+                              "\nEjecuta 'generar' (o deja los archivos del modo app/navegador) antes de renderizar; "
+                              "sin voz, usa --voz no y la narración irá como subtítulos.")
         tramos, t = [], 0.0
         for i, e in enumerate(escenas):
             fuente = self.r.fuente_visual(e)
             voz = self.r.voz(e)
             dur_voz = medios.duracion(voz) if voz else 0.0
+            dur_texto = dur_voz or (estimar_narracion(sin_marcas(e.narracion)) if e.narracion else 0.0)
             sacudida = e.sacudida if ids is None else (e.sacudida or (i == 0 and gancho))
-            dur = round(self._duracion(e, fuente, dur_voz) * FPS) / FPS
-            tramos.append(Tramo(e, fuente, voz, dur_voz, dur, sacudida, inicio=t))
+            dur = round(self._duracion(e, fuente, dur_texto) * FPS) / FPS
+            tramos.append(Tramo(e, fuente, voz, dur_voz, dur, sacudida, inicio=t, dur_texto=dur_texto))
             t += dur
         return tramos
 
     @staticmethod
-    def _duracion(e: Escena, fuente: Path, dur_voz: float) -> float:
-        necesaria = dur_voz + 0.5 if dur_voz else 0.0  # 0.15 s de entrada + 0.35 s de respiro
+    def _duracion(e: Escena, fuente: Path, dur_texto: float) -> float:
+        necesaria = dur_texto + 0.5 if dur_texto else 0.0  # 0.15 s de entrada + 0.35 s de respiro
         if e.tipo == "video":
             clip = medios.duracion(fuente)
-            if not dur_voz:
+            if not dur_texto:
                 return clip
             return max(clip, necesaria) if e.mantener_clip else max(necesaria, 2.0)
         if e.duracion_fija:
             return max(e.duracion, necesaria)
-        return max(dur_voz + 0.6, 2.0) if dur_voz else e.duracion
+        return max(dur_texto + 0.6, 2.0) if dur_texto else e.duracion
 
     # ------------------------------------------------------------------ segmentos
 
@@ -268,8 +273,8 @@ class Montaje:
                 doc.texto(tr.inicio + 0.1, fin - 0.1, e.texto)
             if e.dato:
                 doc.dato(tr.inicio + 0.3, fin - 0.15, e.dato.valor, e.dato.etiqueta)
-            if self.g.subtitulos and tr.voz and e.narracion:
-                doc.subtitulos(tr.inicio + 0.15, tr.dur_voz, e.narracion)
+            if self.g.subtitulos and e.narracion and tr.dur_texto:
+                doc.subtitulos(tr.inicio + 0.15, tr.dur_texto, e.narracion)
         if inicio_cierre is not None and self.g.cierre:
             doc.cierre(inicio_cierre + 0.1, total - 0.1, self.g.cierre, self.g.subcierre)
         return doc
