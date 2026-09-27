@@ -1,0 +1,14 @@
+# Cosas que pasan 2: lo generado no va a git (render/ y entrega/ se recrean; los clips pagados de
+# assets/ se pueden subir a propósito con: git add -f proyectos/<slug>/assets)
+proyectos/*/assets/
+proyectos/*/render/
+proyectos/*/entrega/
+
+# Claves (GEMINI_API_KEY va en .env o en las variables del entorno, nunca en git)
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/

@@ -1,0 +1,71 @@
+{
+  "titulo": "El pueblo donde la gente se quedaba dormida",
+  "formato": "horizontal",
+  "estilo_visual": "cinematic documentary look, realistic, natural winter light, muted cold colors, subtle 35mm film grain",
+  "video": { "modelo": "veo-3.1-lite-generate-preview", "resolucion": "720p" },
+  "voz": {
+    "voz": "Charon",
+    "indicaciones": "Narra en español latino neutro, con tono intrigante y cercano, a ritmo ágil"
+  },
+  "gancho": { "texto": "Se dormían *sin aviso*", "duracion": 3 },
+  "escenas": [
+    {
+      "id": "e01",
+      "tipo": "video",
+      "prompt": "Slow aerial drone shot over a small snowy village in the Kazakh steppe at dawn, smoke rising from chimneys, empty streets",
+      "narracion": "En un pueblo de Kazajistán, la gente empezó a quedarse dormida sin aviso.",
+      "capitulo": "El pueblo"
+    },
+    {
+      "id": "e02",
+      "tipo": "video",
+      "prompt": "A middle-aged man suddenly falls asleep sitting on a wooden bench outside a rural shop, two neighbors rush to wake him, handheld camera",
+      "narracion": "Caían dormidos en plena calle, en el trabajo o en clase, durante horas.",
+      "dato": { "valor": "+100", "etiqueta": "personas afectadas" }
+    },
+    {
+      "id": "e03",
+      "tipo": "imagen",
+      "prompt": "Old weathered metal road sign at the entrance of a remote village, covered in frost, overcast sky, empty snowy road",
+      "narracion": "El pueblo se llama Kalachi, y durante dos años nadie supo explicar qué pasaba.",
+      "efecto": "zoom_in",
+      "texto": "Kalachi, 2013",
+      "capitulo": "El misterio"
+    },
+    {
+      "id": "e04",
+      "tipo": "video",
+      "prompt": "Doctors in white coats measure the air with handheld instruments inside a modest rural house, tense atmosphere, close-up of the device screen",
+      "narracion": "Médicos y científicos analizaron el agua, la comida y el aire.",
+      "capitulo": "La causa"
+    },
+    {
+      "id": "e05",
+      "tipo": "video",
+      "prompt": "Abandoned Soviet-era mine at the edge of the village, rusty towers and broken windows, wind blowing snow, slow push-in, ominous mood",
+      "narracion": "La respuesta estaba muy cerca: una antigua *mina de uranio* abandonada.",
+      "sacudida": true
+    },
+    {
+      "id": "e06",
+      "tipo": "imagen",
+      "prompt": "Families loading furniture into old trucks, leaving a small village under a grey winter sky",
+      "narracion": "Las autoridades relacionaron los casos con gases de la mina, y muchas familias se mudaron.",
+      "efecto": "paneo_der"
+    }
+  ],
+  "cierre": { "texto": "Cosas que pasan", "subtexto": "Suscríbete para más historias reales", "duracion": 3 },
+  "miniatura": { "texto": "Se dormían *sin aviso*", "escena": "e02" },
+  "shorts": [
+    {
+      "titulo": "El pueblo que se quedaba dormido",
+      "escenas": ["e01", "e02", "e05"],
+      "gancho": "¿Por qué se *dormían*?",
+      "encuadre": "recorte"
+    }
+  ],
+  "metadata": {
+    "descripcion": "En Kalachi, un pueblo del norte de Kazajistán, decenas de personas empezaron a quedarse dormidas sin aviso a partir de 2013. Esta es la historia de cómo se buscó la causa.",
+    "etiquetas": ["cosas que pasan", "misterios", "historias reales", "Kazajistán", "Kalachi"]
+  }
+}
