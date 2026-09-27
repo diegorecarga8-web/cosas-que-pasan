@@ -1,0 +1,115 @@
+{
+  "titulo": "El día que el cielo explotó sobre Siberia",
+  "formato": "horizontal",
+  "estilo_visual": "cinematic historical documentary, realistic, early 20th century atmosphere, natural light, muted earthy colors, subtle film grain",
+  "video": {
+    "modelo": "veo-3.1-lite-generate-preview",
+    "resolucion": "720p"
+  },
+  "voz": {
+    "voz": "Charon",
+    "indicaciones": "Narra en español latino neutro, con tono intrigante y cercano, a ritmo ágil"
+  },
+  "gancho": {
+    "texto": "80 millones de árboles *en segundos*",
+    "duracion": 3
+  },
+  "escenas": [
+    {
+      "id": "e01",
+      "tipo": "video",
+      "prompt": "Slow aerial drone shot over an endless Siberian taiga forest at sunrise, a calm winding river, morning mist between the pines, summer",
+      "narracion": "El 30 de junio de 1908, algo explotó sobre los bosques de Siberia.",
+      "sacudida": false
+    },
+    {
+      "id": "e02",
+      "tipo": "video",
+      "prompt": "A blinding fireball streaks across the morning sky above the taiga and bursts high in the air in an enormous flash, shockwave rippling through the clouds, wide shot from the ground",
+      "narracion": "Una bola de fuego cruzó el cielo y estalló en el aire.",
+      "sacudida": true
+    },
+    {
+      "id": "e03",
+      "tipo": "video",
+      "prompt": "A violent shockwave sweeps across a dense pine forest, thousands of trees snapping and falling in the same direction, dust and debris flying, aerial view",
+      "narracion": "La onda expansiva arrasó un bosque de *2.150 kilómetros cuadrados*.",
+      "dato": {
+        "valor": "80 millones",
+        "etiqueta": "de árboles derribados"
+      }
+    },
+    {
+      "id": "e04",
+      "tipo": "imagen",
+      "prompt": "High aerial view of a huge radial pattern of fallen trees pointing outward from a single central point in the Siberian forest, overcast light",
+      "narracion": "Liberó la energía de cientos de bombas como la de Hiroshima.",
+      "efecto": "zoom_out",
+      "dato": {
+        "valor": "10–15",
+        "etiqueta": "megatones de energía"
+      }
+    },
+    {
+      "id": "e05",
+      "tipo": "video",
+      "prompt": "A European city street at midnight in 1908, the night sky glowing with a strange pale silvery light, a man in a coat reads a newspaper under a gas lamp without needing it, slow dolly in",
+      "narracion": "Durante varias noches, en Londres se podía leer el diario a medianoche."
+    },
+    {
+      "id": "e06",
+      "tipo": "imagen",
+      "prompt": "Old 1920s scientific expedition camp with canvas tents in a devastated Siberian forest, dead trees standing like poles without branches, vintage black and white photograph style",
+      "narracion": "Casi veinte años después, la primera expedición no encontró ningún cráter.",
+      "efecto": "paneo_der",
+      "texto": "1927"
+    },
+    {
+      "id": "e07",
+      "tipo": "video",
+      "prompt": "Slow push-in through an eerie forest of dead tree trunks standing upright without branches or bark, low fog, grey sky, ominous mood",
+      "narracion": "Solo árboles de pie, sin ramas, justo debajo de la explosión."
+    },
+    {
+      "id": "e08",
+      "tipo": "imagen",
+      "prompt": "A glowing asteroid entering Earth's atmosphere and breaking apart high above the clouds, seen from space, dramatic sunlight",
+      "narracion": "Hoy se cree que un asteroide o un cometa estalló antes de tocar el suelo.",
+      "efecto": "zoom_in"
+    }
+  ],
+  "cierre": {
+    "texto": "Cosas que pasan",
+    "subtexto": "Suscríbete para más historias reales",
+    "duracion": 3
+  },
+  "miniatura": {
+    "texto": "Explotó y *no dejó cráter*",
+    "escena": "e03"
+  },
+  "shorts": [
+    {
+      "titulo": "¿Qué derribó 80 millones de árboles?",
+      "escenas": [
+        "e02",
+        "e03",
+        "e06",
+        "e07"
+      ],
+      "gancho": "¿Qué derribó *80 millones* de árboles?",
+      "encuadre": "recorte"
+    }
+  ],
+  "metadata": {
+    "descripcion": "El 30 de junio de 1908 una explosión en el aire arrasó unos 2.150 km² de bosque en Siberia, cerca del río Tunguska. No dejó cráter, y durante noches el cielo de Europa brilló tanto que en Londres se podía leer a medianoche. Esta es la historia del evento de Tunguska.\n\nFuentes: Encyclopaedia Britannica, NASA, Royal Observatory Greenwich.",
+    "etiquetas": [
+      "cosas que pasan",
+      "Tunguska",
+      "Siberia",
+      "asteroide",
+      "misterios",
+      "historia",
+      "1908"
+    ]
+  }
+}
