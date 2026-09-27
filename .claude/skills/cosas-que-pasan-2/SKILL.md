@@ -64,6 +64,13 @@ el hook de inicio). ffmpeg viene incluido en `imageio-ffmpeg`.
 Usa la herramienta que controla el Chrome del usuario (Claude in Chrome, la misma que la v1 usaba con
 Flow). La cuenta de Google con el plan ya está iniciada ahí: no pidas contraseñas ni claves.
 
+**Cuenta correcta:** el plan puede estar en otra cuenta de Google distinta de la principal del usuario.
+Si existe `CQP2_CUENTA_GEMINI` (en el `.env` local; `siguiente` la muestra), esa es la cuenta a usar.
+Antes del primer clip, confirma en Gemini la cuenta activa (foto de perfil, arriba a la derecha) y, si no
+es la del plan, cámbiala ahí (o abre `gemini.google.com/u/1/app`, `/u/2/`…). Si esa cuenta no tiene
+sesión iniciada en el Chrome, pide al usuario que la inicie él. No escribas el nombre de la cuenta en
+archivos del repo: es público.
+
 Ciclo, una escena a la vez:
 
 1. `python $CQP siguiente proyectos/<slug>/guion.json` → te dice la escena, dónde va y el prompt exacto.

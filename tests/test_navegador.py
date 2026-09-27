@@ -92,6 +92,15 @@ class TestSiguienteYRecoger(unittest.TestCase):
         _, salida = ejecutar("siguiente", str(base / "guion.json"))
         self.assertIn("Nada pendiente", salida)
 
+    def test_siguiente_recuerda_la_cuenta_del_plan(self):
+        base = proyecto()
+        with mock.patch.dict(os.environ, {"CQP2_CUENTA_GEMINI": "cuenta-del-plan"}):
+            _, salida = ejecutar("siguiente", str(base / "guion.json"))
+        self.assertIn("Cuenta de Google con el plan: cuenta-del-plan", salida)
+        with mock.patch.dict(os.environ, {}, clear=True):
+            _, salida = ejecutar("siguiente", str(base / "guion.json"))
+        self.assertNotIn("Cuenta de Google", salida)
+
     @unittest.skipUnless(HAY_FFMPEG, "ffmpeg no disponible")
     def test_recoger_la_descarga_mas_reciente(self):
         base, descargas = proyecto(), Path(tempfile.mkdtemp())

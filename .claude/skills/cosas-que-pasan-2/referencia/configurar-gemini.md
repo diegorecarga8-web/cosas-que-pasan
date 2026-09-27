@@ -22,7 +22,9 @@ modo.
 
 ## 1. Crear la clave
 
-1. Entra a <https://aistudio.google.com/apikey> con tu cuenta de Google (la misma del plan).
+1. Entra a <https://aistudio.google.com/apikey> con la cuenta de Google **que tiene el plan** (si el plan
+   está en otra cuenta distinta de la principal, cambia a esa antes de crear la clave: así los créditos
+   del plan se pueden aplicar).
 2. **Create API key** → elige o crea un proyecto de Google Cloud.
 3. Veo, las imágenes y la voz requieren el **nivel de pago**: en AI Studio, en ese proyecto, activa la
    facturación (*Set up billing*). Sin facturación la API responde con error de cuota o de permisos.
@@ -42,8 +44,9 @@ de gastar (`--confirmar`, `--max-usd`).
 - **Claude Code en la nube (web/app):** menú del entorno en la barra de título de la sesión → *Edit* →
   en *API credentials* (o variables de entorno) agrega `GEMINI_API_KEY` con tu clave. Las sesiones nuevas
   la reciben. El host `generativelanguage.googleapis.com` debe estar permitido en la red del entorno.
-- **En tu PC:** crea un archivo `.env` en la raíz del repo con `GEMINI_API_KEY=tu_clave` (ya está en
-  `.gitignore`) o define la variable de entorno en Windows.
+- **En tu PC:** copia `.env.example` como `.env` en la raíz del repo y completa `GEMINI_API_KEY` (el `.env`
+  ya está en `.gitignore`) o define la variable de entorno en Windows. En ese mismo `.env`,
+  `CQP2_CUENTA_GEMINI` indica la cuenta de Google con el plan para el modo navegador.
 
 ## 4. Probar
 

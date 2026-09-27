@@ -168,6 +168,10 @@ def cmd_siguiente(args) -> int:
     carpeta, ext = ("clips", "mp4") if e.tipo == "video" else ("imagenes", "png")
     herramienta = "la herramienta Video" if e.tipo == "video" else "el chat normal (genera imágenes)"
     print(f"Pendiente 1 de {len(pendientes)}: {e.id} ({e.tipo}) → {g.dir.name}/{carpeta}/{e.id}.{ext}")
+    cuenta = os.environ.get("CQP2_CUENTA_GEMINI")
+    if cuenta:  # el plan puede estar en otra cuenta de Google que la principal del navegador
+        print(f"Cuenta de Google con el plan: {cuenta} (confírmala en la foto de perfil de Gemini; si no es la "
+              "activa, cámbiala ahí)")
     print(f"En gemini.google.com/app: chat nuevo → {herramienta} → pega este prompt tal cual:\n")
     print(prompt_app(g, e))
     print(f"\nCuando termine la descarga: python {Path(sys.argv[0]).as_posix()} recoger {args.guion} {e.id}")
