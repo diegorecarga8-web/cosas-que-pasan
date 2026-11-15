@@ -26,7 +26,8 @@ body { font-family:"Kalam", cursive; color:var(--pencil); font-size:16.3pt; line
 .col { flex:1; min-width:0; }
 h1 { font-family:"Caveat"; font-weight:700; font-size:38pt; color:var(--blue); margin:0 0 1mm; line-height:1; }
 h2 { font-family:"Caveat"; font-weight:700; font-size:28pt; color:var(--blue); margin:1mm 0 1.5mm; line-height:1.05;
-  text-decoration: underline; text-decoration-style: wavy; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+  display:inline-block; padding-bottom:5px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='6'%3E%3Cpath d='M0 3 Q4 0 8 3 T16 3' fill='none' stroke='%231f3f94' stroke-width='1.2'/%3E%3C/svg%3E") repeat-x left bottom; }
 h3 { font-weight:700; font-size:17pt; margin:3.5mm 0 1mm; color:#23262b; line-height:1.2; }
 p { margin:0.5mm 0; }
 ul { margin:0.5mm 0; padding-left:5mm; }
@@ -56,6 +57,10 @@ table.h th { color:var(--blue); }
 table.h td:first-child, table.h th:first-child { text-align:left; }
 .arrow { color:var(--red); font-weight:700; }
 .small { font-size:14.5pt; }
+.w { display:inline-block; white-space:nowrap; }
+.c { display:inline-block; transform-origin: 50% 70%; }
+.content { filter:url(#ink); }
+li, p, h1, h2, h3 { transform-origin: 0 50%; }
 </style>
 </head>
 <body>
@@ -318,7 +323,8 @@ table.h td:first-child, table.h th:first-child { text-align:left; }
         </svg>
         <div class="t">
           <p>A<sub>b</sub> = 25 · 10 = 250 cm²</p>
-          <p>V = <span class="frac"><span>1</span><span>3</span></span> · 250 · 12 = <span class="frac"><span>3000</span><span>3</span></span></p>
+          <p>V = <span class="frac"><span>1</span><span>3</span></span> · 250 · 12</p>
+          <p>V = <span class="frac"><span>3000</span><span>3</span></span></p>
           <span class="res">V = 1000 cm³</span>
         </div>
       </div>
@@ -671,5 +677,59 @@ table.h td:first-child, table.h th:first-child { text-align:left; }
   <div class="pnum">9</div>
 </div>
 
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <filter id="ink" x="-2%" y="-2%" width="104%" height="104%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.11" numOctaves="2" seed="11" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+</svg>
+<script>
+(function(){
+  let seed = 20261115;
+  const rnd = () => { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; };
+  const g = (a) => (rnd() + rnd() + rnd() - 1.5) / 1.5 * a; // approx gaussian in [-a, a]
+  function jitterNode(tn){
+    const txt = tn.nodeValue; if(!txt.trim()) return;
+    const frag = document.createDocumentFragment();
+    txt.split(/(\s+)/).forEach(part => {
+      if(!part) return;
+      if(/^\s+$/.test(part)){ frag.appendChild(document.createTextNode(part)); return; }
+      const w = document.createElement('span'); w.className='w';
+      const wr = g(1.4), wy = g(0.07);
+      w.style.transform = `translateY(${wy.toFixed(3)}em) rotate(${wr.toFixed(2)}deg)`;
+      [...part].forEach(ch => {
+        const c = document.createElement('span'); c.className='c'; c.textContent = ch;
+        const r = g(6.5), dy = g(0.095), sx = 1 + g(0.11), sy = 1 + g(0.12), sk = g(7);
+        c.style.transform = `translateY(${dy.toFixed(3)}em) rotate(${r.toFixed(2)}deg) skewX(${sk.toFixed(2)}deg) scale(${sx.toFixed(3)},${sy.toFixed(3)})`;
+        c.style.marginRight = g(0.05).toFixed(3) + 'em';
+        c.style.opacity = (0.8 + rnd()*0.2).toFixed(2);
+        if(rnd() < 0.12) c.style.fontWeight = '700';
+        w.appendChild(c);
+      });
+      frag.appendChild(w);
+    });
+    tn.parentNode.replaceChild(frag, tn);
+  }
+  document.querySelectorAll('.content').forEach(root => {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode: n => n.parentElement.closest('svg') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
+    const nodes = []; while(walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(jitterNode);
+  });
+  // whole lines/blocks drift a little, like a hand that does not keep perfectly straight
+  document.querySelectorAll('.content p, .content li, .content h3, .content h2, .content h1').forEach(el => {
+    el.style.transform = `rotate(${g(0.7).toFixed(2)}deg) translateX(${g(0.8).toFixed(2)}mm)`;
+  });
+  // labels inside the drawings
+  document.querySelectorAll('svg.sk text').forEach(t => {
+    const n = [...t.textContent].length;
+    t.setAttribute('rotate', Array.from({length:n}, () => g(7).toFixed(1)).join(' '));
+    t.setAttribute('dy', Array.from({length:n}, () => g(0.9).toFixed(2)).join(' '));
+  });
+})();
+</script>
 </body>
 </html>
