@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Apuntes Taller 3</title>
+<style>
+@font-face { font-family: "Kalam"; src: url("fonts/Kalam-Regular.ttf"); font-weight: 400; }
+@font-face { font-family: "Kalam"; src: url("fonts/Kalam-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Caveat"; src: url("fonts/Caveat.ttf"); font-weight: 400 700; }
+@page { size: 279.4mm 215.9mm; margin: 0; }
+:root { --pencil:#34373d; --blue:#1f3f94; --red:#c62828; --grid:rgba(120,130,170,.28); }
+* { box-sizing: border-box; }
+html, body { margin:0; padding:0; background:#fff; }
+body { font-family:"Kalam", cursive; color:var(--pencil); font-size:16.3pt; line-height:1.36; }
+.page { width:279.4mm; height:215.9mm; position:relative; overflow:hidden; break-after:page;
+  background-color:#fbfbf7; }
+.grid { position:absolute; left:24mm; top:10mm; right:9mm; bottom:9mm; border:0.35mm solid var(--grid); border-radius:3mm;
+  background-image: linear-gradient(var(--grid) 0.25mm, transparent 0.25mm), linear-gradient(90deg, var(--grid) 0.25mm, transparent 0.25mm);
+  background-size: 5mm 5mm; background-position: -0.1mm -0.1mm; }
+.datebox { position:absolute; left:11mm; top:10mm; width:10mm; height:42mm; border:0.35mm solid var(--grid); border-radius:2.5mm; }
+.datebox span { position:absolute; left:-6mm; transform:rotate(-90deg); font-family:Arial, sans-serif; font-size:6pt; color:rgba(110,115,140,.6); }
+.strip { position:absolute; left:11mm; top:55mm; width:10mm; bottom:9mm; border:0.35mm solid var(--grid); border-radius:2.5mm; }
+.date { position:absolute; left:12.2mm; top:13mm; width:8mm; font-family:"Caveat"; font-size:13pt; color:var(--blue); line-height:1.05; text-align:center; }
+.pnum { position:absolute; right:12mm; bottom:2.5mm; font-family:"Caveat"; font-size:14pt; color:var(--pencil); }
+.content { position:absolute; left:28mm; top:13mm; right:13mm; bottom:12mm; display:flex; gap:9mm; }
+.col { flex:1; min-width:0; }
+h1 { font-family:"Caveat"; font-weight:700; font-size:38pt; color:var(--blue); margin:0 0 1mm; line-height:1; }
+h2 { font-family:"Caveat"; font-weight:700; font-size:28pt; color:var(--blue); margin:1mm 0 1.5mm; line-height:1.05;
+  text-decoration: underline; text-decoration-style: wavy; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+h3 { font-weight:700; font-size:17pt; margin:3.5mm 0 1mm; color:#23262b; line-height:1.2; }
+p { margin:0.5mm 0; }
+ul { margin:0.5mm 0; padding-left:5mm; }
+li { margin:0; }
+li::marker { color:var(--blue); }
+.blue { color:var(--blue); }
+.red { color:var(--red); }
+.hl { background: linear-gradient(180deg, transparent 45%, rgba(255,230,60,.65) 45%, rgba(255,230,60,.65) 88%, transparent 88%); padding:0 1mm; }
+.res { display:inline-block; color:var(--red); font-weight:700; border:2px solid var(--red); padding:0 2.5mm; margin:1mm 0 0.5mm;
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px; transform: rotate(-0.8deg); }
+.box { border:1.6px solid var(--blue); padding:1.2mm 2.5mm; margin:1.5mm 0; border-radius: 15px 255px 15px 225px / 225px 15px 255px 15px; }
+.note { font-family:"Caveat"; font-size:20pt; color:var(--blue); line-height:1.1; margin:1mm 0; }
+.frac { display:inline-flex; flex-direction:column; vertical-align:middle; text-align:center; line-height:1; font-size:.9em; margin:0 .5mm; }
+.frac > span:first-child { border-bottom:1.3px solid currentColor; padding:0 .8mm .3mm; }
+.frac > span:last-child { padding:.3mm .8mm 0; }
+.row { display:flex; gap:5mm; align-items:flex-start; }
+.row > .t { flex:1; min-width:0; }
+.tilt1 { transform: rotate(-0.4deg); } .tilt2 { transform: rotate(0.35deg); }
+svg.sk { flex:none; overflow:visible; zoom:1.32; }
+svg.sk .s { fill:none; stroke:#3b3e45; stroke-width:1.3; stroke-linecap:round; stroke-linejoin:round; filter:url(#rough); }
+svg.sk .d { fill:none; stroke:#4a4d55; stroke-width:1.1; stroke-dasharray:4 3; filter:url(#rough); }
+svg.sk text { font-family:"Kalam"; font-size:11px; fill:#2b2e33; }
+svg.sk text.r { fill:var(--red); font-weight:700; }
+table.h { border-collapse:collapse; width:100%; margin:1mm 0; font-size:14.5pt; }
+table.h td, table.h th { border:1.3px solid #4a4d55; padding:0.3mm 1.5mm; text-align:center; line-height:1.2; }
+table.h th { color:var(--blue); }
+table.h td:first-child, table.h th:first-child { text-align:left; }
+.arrow { color:var(--red); font-weight:700; }
+.small { font-size:14.5pt; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <pattern id="hb" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5" stroke="#6aa6e0" stroke-width="1.4" opacity=".55"/></pattern>
+    <pattern id="ho" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5" stroke="#f0965a" stroke-width="1.4" opacity=".55"/></pattern>
+    <pattern id="hg" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5" stroke="#6cbf6c" stroke-width="1.4" opacity=".55"/></pattern>
+    <pattern id="hy" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5" stroke="#e8c53a" stroke-width="1.4" opacity=".6"/></pattern>
+    <pattern id="hp" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5" stroke="#b28ad8" stroke-width="1.4" opacity=".6"/></pattern>
+    <pattern id="hk" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5" stroke="#e57bb0" stroke-width="1.4" opacity=".55"/></pattern>
+  </defs>
+</svg>
+
+<!-- ================= HOJA 1 ================= -->
+<div class="page">
+  <div class="datebox"><span style="top:3mm">AA</span><span style="top:17mm">MM</span><span style="top:31mm">DD</span></div><div class="strip"></div>
+  <div class="grid"></div>
+  <div class="content">
+    <div class="col">
+      <h1>Taller 3 · Corte 3</h1>
+      <p class="blue" style="margin-top:-1mm">Pensamiento Lógico, cuerpos geométricos</p>
+      <h2>1. Características de los cuerpos</h2>
+      <p><span class="hl">Poliedros</span>: todas sus caras son planas (polígonos).<br>
+      <span class="hl">Cuerpos redondos</span>: tienen alguna superficie curva.</p>
+      <div class="box tilt1"><b>Fórmula de Euler</b> (solo poliedros):<br>
+      <span class="red"><b>Caras + Vértices − Aristas = 2</b></span></div>
+
+      <h3>a) Prisma hexagonal <span class="blue">(poliedro)</span></h3>
+      <div class="row">
+        <svg class="sk" width="80" height="110" viewBox="0 0 80 110">
+          <polygon points="12,14 28,5 52,5 68,14 52,23 28,23" fill="url(#hb)" stroke="none"/>
+          <polygon class="s" points="12,14 28,5 52,5 68,14 52,23 28,23"/>
+          <polyline class="s" points="12,14 12,92 28,101 52,101 68,92 68,14"/>
+          <line class="s" x1="28" y1="23" x2="28" y2="101"/><line class="s" x1="52" y1="23" x2="52" y2="101"/>
+          <polyline class="d" points="12,92 28,83 52,83 68,92"/>
+        </svg>
+        <div class="t"><ul>
+          <li>2 bases = hexágonos iguales y paralelos</li>
+          <li>6 caras laterales = rectángulos</li>
+          <li><b>8 caras · 18 aristas · 12 vértices</b></li>
+          <li>Euler: 8 + 12 − 18 = 2 ✓</li>
+          <li>V = A<sub>base</sub> · h</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="col">
+      <h3 style="margin-top:0">b) Pirámide cuadrangular <span class="blue">(poliedro)</span></h3>
+      <div class="row">
+        <svg class="sk" width="100" height="92" viewBox="0 0 100 92">
+          <polygon points="50,6 8,66 58,82" fill="url(#ho)" stroke="none"/>
+          <polygon class="s" points="50,6 8,66 58,82 94,60"/>
+          <line class="s" x1="50" y1="6" x2="58" y2="82"/>
+          <polyline class="d" points="8,66 44,46 94,60"/><line class="d" x1="50" y1="6" x2="44" y2="46"/>
+          <line class="d" x1="50" y1="6" x2="50" y2="63" style="stroke:#c62828"/><text x="53" y="44" class="r">h</text>
+        </svg>
+        <div class="t"><ul>
+          <li>1 base = cuadrado</li>
+          <li>4 caras laterales = triángulos que se juntan en la <b>cúspide</b></li>
+          <li><b>5 caras · 8 aristas · 5 vértices</b></li>
+          <li>Euler: 5 + 5 − 8 = 2 ✓</li>
+          <li>V = <span class="frac"><span>1</span><span>3</span></span> A<sub>base</sub> · h</li>
+        </ul></div>
+      </div>
+
+      <h3>c) Cono <span class="blue">(cuerpo redondo)</span></h3>
+      <div class="row">
+        <svg class="sk" width="84" height="100" viewBox="0 0 84 100">
+          <path d="M42,6 L8,82 A34,10 0 0 0 76,82 Z" fill="url(#hg)" stroke="none"/>
+          <path class="s" d="M42,6 L8,82 A34,10 0 0 0 76,82 Z"/>
+          <path class="d" d="M8,82 A34,10 0 0 1 76,82"/>
+          <line class="d" x1="42" y1="6" x2="42" y2="82"/><line class="d" x1="42" y1="82" x2="76" y2="82"/>
+          <text x="45" y="50">h</text><text x="56" y="79">r</text><text x="63" y="42" class="r">g</text>
+        </svg>
+        <div class="t"><ul>
+          <li>1 base circular + 1 superficie curva</li>
+          <li>1 vértice (cúspide), sin aristas rectas</li>
+          <li>Elementos: radio <b>r</b>, altura <b>h</b>, generatriz <b>g</b></li>
+          <li>Sale de girar un triángulo rectángulo sobre un cateto</li>
+          <li>V = <span class="frac"><span>1</span><span>3</span></span> π r² h</li>
+        </ul></div>
+      </div>
+      <p class="note">→ el cono es "la pirámide" del cilindro 😉</p>
+    </div>
+  </div>
+  <div class="pnum">1</div>
+</div>
+
+<!-- ================= HOJA 2 ================= -->
+<div class="page">
+  <div class="datebox"><span style="top:3mm">AA</span><span style="top:17mm">MM</span><span style="top:31mm">DD</span></div><div class="strip"></div>
+  <div class="grid"></div>
+  <div class="content">
+    <div class="col">
+      <h3 style="margin-top:0">d) Cubo / hexaedro regular <span class="blue">(poliedro)</span></h3>
+      <div class="row">
+        <svg class="sk" width="86" height="86" viewBox="0 0 86 86">
+          <polygon points="60,26 80,8 80,60 60,78" fill="url(#hy)" stroke="none"/>
+          <polygon class="s" points="8,26 60,26 60,78 8,78"/>
+          <polyline class="s" points="8,26 28,8 80,8 60,26"/><polyline class="s" points="80,8 80,60 60,78"/>
+          <polyline class="d" points="8,78 28,60 80,60"/><line class="d" x1="28" y1="8" x2="28" y2="60"/>
+          <text x="28" y="84">a</text>
+        </svg>
+        <div class="t"><ul>
+          <li>6 caras = cuadrados iguales</li>
+          <li><b>6 caras · 12 aristas · 8 vértices</b></li>
+          <li>Euler: 6 + 8 − 12 = 2 ✓</li>
+          <li>todas las aristas miden igual (a)</li>
+          <li>V = a³ &nbsp;·&nbsp; Área = 6a²</li>
+        </ul></div>
+      </div>
+
+      <h3>e) Cilindro <span class="blue">(cuerpo redondo)</span></h3>
+      <div class="row">
+        <svg class="sk" width="76" height="100" viewBox="0 0 76 100">
+          <path d="M8,14 L8,84 A30,9 0 0 0 68,84 L68,14 Z" fill="url(#hy)" stroke="none"/>
+          <path class="s" d="M8,14 L8,84 A30,9 0 0 0 68,84 L68,14"/>
+          <ellipse class="s" cx="38" cy="14" rx="30" ry="9"/>
+          <path class="d" d="M8,84 A30,9 0 0 1 68,84"/>
+          <line class="d" x1="38" y1="14" x2="68" y2="14"/><text x="48" y="11">r</text>
+        </svg>
+        <div class="t"><ul>
+          <li>2 bases = círculos iguales y paralelos</li>
+          <li>1 superficie lateral curva (abierta es un rectángulo)</li>
+          <li>0 vértices, 0 aristas rectas</li>
+          <li>Sale de girar un rectángulo sobre un lado</li>
+          <li>V = π r² h</li>
+        </ul></div>
+      </div>
+      <h3>¿Cómo se generan los redondos? (giro 360°)</h3>
+      <svg class="sk" width="330" height="110" viewBox="0 0 330 110" style="zoom:1">
+        <!-- triangle -> cone -->
+        <line class="d" x1="30" y1="10" x2="30" y2="80" style="stroke:#c62828"/>
+        <polygon class="s" points="30,10 30,80 62,80" fill="url(#hg)"/>
+        <text x="8" y="100">triángulo → cono</text>
+        <!-- rectangle -> cylinder -->
+        <line class="d" x1="135" y1="8" x2="135" y2="82" style="stroke:#c62828"/>
+        <rect class="s" x="135" y="14" width="32" height="64" fill="url(#hy)"/>
+        <text x="110" y="100">rectángulo → cilindro</text>
+        <!-- semicircle -> sphere -->
+        <line class="d" x1="258" y1="6" x2="258" y2="84" style="stroke:#c62828"/>
+        <path class="s" d="M258,10 A35,35 0 0 1 258,80 Z" fill="url(#hg)"/>
+        <text x="222" y="100">semicírculo → esfera</text>
+        <path class="s" d="M22,30 q8,-10 16,0" style="stroke:#c62828"/><path class="s" d="M127,30 q8,-10 16,0" style="stroke:#c62828"/><path class="s" d="M250,30 q8,-10 16,0" style="stroke:#c62828"/>
+      </svg>
+      
+
+    </div>
+    <div class="col">
+      <h3 style="margin-top:0">f) Esfera <span class="blue">(cuerpo redondo)</span></h3>
+      <div class="row">
+        <svg class="sk" width="84" height="84" viewBox="0 0 84 84">
+          <circle cx="42" cy="42" r="36" fill="url(#hg)" stroke="none"/>
+          <circle class="s" cx="42" cy="42" r="36"/>
+          <path class="s" d="M6,42 A36,9 0 0 0 78,42"/><path class="d" d="M6,42 A36,9 0 0 1 78,42"/>
+          <circle cx="42" cy="42" r="1.8" fill="#222"/><line class="d" x1="42" y1="42" x2="78" y2="42" style="stroke:#c62828"/>
+          <text x="56" y="38" class="r">r</text>
+        </svg>
+        <div class="t"><ul>
+          <li>1 sola superficie curva y cerrada</li>
+          <li>todos sus puntos están a la misma distancia (r) del centro</li>
+          <li>sin caras planas, aristas ni vértices</li>
+          <li>Sale de girar un semicírculo sobre su diámetro</li>
+          <li>V = <span class="frac"><span>4</span><span>3</span></span> π r³ · Área = 4π r²</li>
+        </ul></div>
+      </div>
+      <h3>Resumen punto 1</h3>
+      <table class="h tilt2">
+        <tr><th>Cuerpo</th><th>Tipo</th><th>C</th><th>A</th><th>V</th></tr>
+        <tr><td>Prisma hexag.</td><td>poliedro</td><td>8</td><td>18</td><td>12</td></tr>
+        <tr><td>Pirámide cuadr.</td><td>poliedro</td><td>5</td><td>8</td><td>5</td></tr>
+        <tr><td>Cono</td><td>redondo</td><td>1 base + curva</td><td>0</td><td>1</td></tr>
+        <tr><td>Cubo</td><td>poliedro</td><td>6</td><td>12</td><td>8</td></tr>
+        <tr><td>Cilindro</td><td>redondo</td><td>2 bases + curva</td><td>0</td><td>0</td></tr>
+        <tr><td>Esfera</td><td>redondo</td><td>1 curva</td><td>0</td><td>0</td></tr>
+      </table>
+      <p class="small">C = caras · A = aristas · V = vértices</p>
+      <p class="note">truco (dibujo de la izquierda): la línea roja es el eje de giro</p>
+
+
+    </div>
+  </div>
+  <div class="pnum">2</div>
+</div>
+
+<!-- ================= HOJA 3 ================= -->
+<div class="page">
+  <div class="datebox"><span style="top:3mm">AA</span><span style="top:17mm">MM</span><span style="top:31mm">DD</span></div><div class="strip"></div>
+  <div class="grid"></div>
+  <div class="content">
+    <div class="col">
+      <h2 style="margin-top:0">2. Sólidos apilando capas</h2>
+      <div class="box tilt1">Idea clave (Cavalieri): si apilo capas iguales,<br>
+      <span class="red"><b>V = área de la capa × n.º de capas = A<sub>base</sub> × h</b></span></div>
+
+      <h3>Situación 1: cubitos de 1 cm³ (base 5 × 3 × 1)</h3>
+      <div class="row">
+        <svg class="sk" width="150" height="118" viewBox="0 0 150 118">
+          <polygon points="8,34 104,34 104,106 8,106" fill="url(#hk)" stroke="none"/>
+          <polygon class="s" points="8,34 104,34 104,106 8,106"/>
+          <polyline class="s" points="8,34 36,14 132,14 104,34"/><polyline class="s" points="132,14 132,86 104,106"/>
+          <g class="s" style="stroke-width:.8"><line x1="27" y1="34" x2="27" y2="106"/><line x1="46" y1="34" x2="46" y2="106"/><line x1="66" y1="34" x2="66" y2="106"/><line x1="85" y1="34" x2="85" y2="106"/>
+          <line x1="8" y1="52" x2="104" y2="52"/><line x1="8" y1="70" x2="104" y2="70"/><line x1="8" y1="88" x2="104" y2="88"/>
+          <line x1="104" y1="52" x2="132" y2="32"/><line x1="104" y1="70" x2="132" y2="50"/><line x1="104" y1="88" x2="132" y2="68"/></g>
+          <text x="45" y="117">5 cm</text><text x="122" y="104">3 cm</text><text x="134" y="56" class="r">4</text>
+        </svg>
+        <div class="t">
+          <p><b>a)</b> Apilando 4 bloques sale un<br><span class="hl">prisma rectangular (ortoedro)</span><br>de 5 × 3 × 4 cm.</p>
+        </div>
+      </div>
+      <p><b>b)</b> 1 bloque = 5 · 3 · 1 = 15 cubitos = 15 cm³</p>
+      <p>4 bloques → 15 · 4 = 60 cm³</p>
+      <p class="small">comprobación: V = l · a · h = 5 · 3 · 4 = 60 ✓</p>
+      <span class="res">V = 60 cm³</span>
+    </div>
+    <div class="col">
+      <h3 style="margin-top:9mm">Situación 2: disco r = 3 cm, h = 1 cm (A<sub>base</sub> = 9π)</h3>
+      <div class="row">
+        <svg class="sk" width="130" height="130" viewBox="0 0 130 130">
+          <path d="M10,22 L10,112 A55,13 0 0 0 120,112 L120,22 Z" fill="url(#hb)" stroke="none"/>
+          <path class="s" d="M10,22 L10,112 A55,13 0 0 0 120,112 L120,22"/>
+          <ellipse class="s" cx="65" cy="22" rx="55" ry="13" fill="#fbfbf7"/>
+          <path class="s" d="M10,40 A55,13 0 0 0 120,40"/><path class="s" d="M10,58 A55,13 0 0 0 120,58"/><path class="s" d="M10,76 A55,13 0 0 0 120,76"/><path class="s" d="M10,94 A55,13 0 0 0 120,94"/>
+          <line class="d" x1="65" y1="22" x2="120" y2="22"/><text x="82" y="18">3</text>
+          <text x="124" y="70" class="r">5</text>
+        </svg>
+        <div class="t">
+          <p><b>a)</b> Apilando 5 discos sale un<br><span class="hl">cilindro</span> de r = 3 cm<br>y h = 5 cm.</p>
+        </div>
+      </div>
+      <p><b>b)</b> 1 disco: V = 9π · 1 = 9π cm³</p>
+      <p>5 discos → 9π · 5 = 45π cm³</p>
+      <p class="small">con fórmula: π · 3² · 5 = 45π ✓</p>
+      <span class="res">V = 45π ≈ 141,37 cm³</span>
+      <p class="note" style="margin-top:3mm">conclusión: prisma y cilindro → V = A<sub>base</sub> · h<br>(la altura = cuántas capas apilo)</p>
+    </div>
+  </div>
+  <div class="pnum">3</div>
+</div>
+
+<!-- ================= HOJA 4 ================= -->
+<div class="page">
+  <div class="datebox"><span style="top:3mm">AA</span><span style="top:17mm">MM</span><span style="top:31mm">DD</span></div><div class="strip"></div>
+  <div class="grid"></div>
+  <div class="content">
+    <div class="col">
+      <h2 style="margin-top:0">3. Volumen de los sólidos</h2>
+      <h3>3.1 Pirámide base rectangular</h3>
+      <div class="row">
+        <svg class="sk" width="140" height="80" viewBox="0 0 140 80">
+          <polygon points="62,6 6,60 104,70" fill="url(#ho)" stroke="none"/>
+          <polygon class="s" points="62,6 6,60 104,70 134,52"/><line class="s" x1="62" y1="6" x2="104" y2="70"/>
+          <polyline class="d" points="6,60 38,44 134,52"/><line class="d" x1="62" y1="6" x2="38" y2="44"/>
+          <line class="d" x1="62" y1="6" x2="66" y2="57" style="stroke:#c62828"/><text x="68" y="38" class="r">12</text>
+          <text x="40" y="78">25</text><text x="122" y="70">10</text>
+        </svg>
+        <div class="t">
+          <p>A<sub>b</sub> = 25 · 10 = 250 cm²</p>
+          <p>V = <span class="frac"><span>1</span><span>3</span></span> · 250 · 12 = <span class="frac"><span>3000</span><span>3</span></span></p>
+          <span class="res">V = 1000 cm³</span>
+        </div>
+      </div>
+
+      <h3>3.2 Cono (r = 5, h = 18)</h3>
+      <div class="row">
+        <svg class="sk" width="70" height="100" viewBox="0 0 70 100">
+          <path d="M35,4 L6,84 A29,8 0 0 0 64,84 Z" fill="url(#hb)" stroke="none"/>
+          <path class="s" d="M35,4 L6,84 A29,8 0 0 0 64,84 Z"/><path class="d" d="M6,84 A29,8 0 0 1 64,84"/>
+          <line class="d" x1="35" y1="4" x2="35" y2="84" style="stroke:#c62828"/><line class="d" x1="35" y1="84" x2="64" y2="84"/>
+          <text x="38" y="50" class="r">18</text><text x="44" y="81">5</text>
+        </svg>
+        <div class="t">
+          <p>V = <span class="frac"><span>1</span><span>3</span></span> π r² h</p>
+          <p>V = <span class="frac"><span>1</span><span>3</span></span> π · 25 · 18 = <span class="frac"><span>450π</span><span>3</span></span></p>
+          <span class="res">V = 150π ≈ 471,24 cm³</span>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <h3 style="margin-top:10mm">3.3 Cilindro (r = 6, h = 12)</h3>
+      <div class="row">
+        <svg class="sk" width="86" height="100" viewBox="0 0 86 100">
+          <path d="M8,14 L8,84 A35,10 0 0 0 78,84 L78,14 Z" fill="url(#hg)" stroke="none"/>
+          <path class="s" d="M8,14 L8,84 A35,10 0 0 0 78,84 L78,14"/><ellipse class="s" cx="43" cy="14" rx="35" ry="10"/>
+          <path class="d" d="M8,84 A35,10 0 0 1 78,84"/>
+          <line class="d" x1="43" y1="14" x2="43" y2="84" style="stroke:#c62828"/><line class="d" x1="43" y1="84" x2="78" y2="84"/>
+          <text x="46" y="52" class="r">12</text><text x="56" y="81">6</text>
+        </svg>
+        <div class="t">
+          <p>V = π r² h = π · 6² · 12</p>
+          <p>V = π · 36 · 12 = 432π</p>
+          <span class="res">V = 432π ≈ 1357,17 cm³</span>
+        </div>
+      </div>
+
+      <h3>3.4 Esfera (r = 22)</h3>
+      <div class="row">
+        <svg class="sk" width="84" height="84" viewBox="0 0 84 84">
+          <circle cx="42" cy="42" r="36" fill="url(#ho)" stroke="none"/><circle class="s" cx="42" cy="42" r="36"/>
+          <path class="s" d="M6,42 A36,9 0 0 0 78,42"/><path class="d" d="M6,42 A36,9 0 0 1 78,42"/>
+          <line class="d" x1="42" y1="42" x2="78" y2="42" style="stroke:#c62828"/><text x="52" y="38" class="r">22</text>
+        </svg>
+        <div class="t">
+          <p>V = <span class="frac"><span>4</span><span>3</span></span> π r³ = <span class="frac"><span>4</span><span>3</span></span> π · 22³</p>
+          <p>22³ = 10 648</p>
+          <p>V = <span class="frac"><span>42 592</span><span>3</span></span> π ≈ 14 197,33 π</p>
+          <span class="res">V ≈ 44 602,24 cm³</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pnum">4</div>
+</div>
+
+<!-- ================= HOJA 5 ================= -->
+<div class="page">
+  <div class="datebox"><span style="top:3mm">AA</span><span style="top:17mm">MM</span><span style="top:31mm">DD</span></div><div class="strip"></div>
+  <div class="grid"></div>
+  <div class="content">
+    <div class="col">
+      <h3 style="margin-top:0">3.5 Prisma rectangular (6 × 2 × 1)</h3>
+      <div class="row">
+        <svg class="sk" width="150" height="62" viewBox="0 0 150 62">
+          <polygon points="8,26 112,26 112,54 8,54" fill="url(#hb)" stroke="none"/>
+          <polygon class="s" points="8,26 112,26 112,54 8,54"/><polyline class="s" points="8,26 34,8 138,8 112,26"/><polyline class="s" points="138,8 138,36 112,54"/>
+          <polyline class="d" points="8,54 34,36 138,36"/><line class="d" x1="34" y1="8" x2="34" y2="36"/>
+          <text x="52" y="62">6 cm</text><text x="128" y="56">2</text><text x="114" y="44">1</text>
+        </svg>
+        <div class="t">
+          <p>V = l · a · h</p>
+          <p>V = 6 · 2 · 1</p>
+          <span class="res">V = 12 cm³</span>
+        </div>
+      </div>
+
+      <h3>3.6 Prisma pentagonal oblicuo</h3>
+      <p class="small">base: pentágono de lado 4 cm, apotema 2,75 cm · altura 10 cm</p>
+      <div class="row">
+        <svg class="sk" width="100" height="130" viewBox="0 0 100 130">
+          <polygon points="30,6 54,2 72,12 60,26 34,22" fill="url(#hb)" stroke="none"/>
+          <polygon class="s" points="30,6 54,2 72,12 60,26 34,22"/>
+          <polygon class="s" points="8,104 32,100 50,110 38,124 12,120"/>
+          <line class="s" x1="30" y1="6" x2="8" y2="104"/><line class="s" x1="34" y1="22" x2="12" y2="120"/><line class="s" x1="60" y1="26" x2="38" y2="124"/><line class="s" x1="72" y1="12" x2="50" y2="110"/>
+          <line class="d" x1="54" y1="2" x2="32" y2="100"/>
+          <line class="s" x1="88" y1="12" x2="88" y2="110" style="stroke:#c62828"/><text x="90" y="64" class="r">10</text>
+          <text x="20" y="130">4</text>
+        </svg>
+        <div class="t">
+          <p>Perímetro = 5 · 4 = 20 cm</p>
+          <p>A<sub>b</sub> = <span class="frac"><span>P · ap</span><span>2</span></span> = <span class="frac"><span>20 · 2,75</span><span>2</span></span> = 27,5 cm²</p>
+          <p>V = A<sub>b</sub> · h = 27,5 · 10</p>
+          <span class="res">V = 275 cm³</span>
+        </div>
+      </div>
+      <p class="note">ojo: aunque esté inclinado, uso la altura perpendicular (10), no la arista inclinada → Cavalieri</p>
+    </div>
+    <div class="col">
+      <h2 style="margin-top:0">4. Sólidos compuestos</h2>
+      <p class="note" style="margin-top:0">V total = suma de los volúmenes de las partes</p>
+      <h3>a) Semiesfera + cono (r = 3, h<sub>cono</sub> = 5)</h3>
+      <div class="row">
+        <svg class="sk" width="100" height="128" viewBox="0 0 100 128">
+          <path d="M12,44 A38,38 0 0 1 88,44 Z" fill="url(#hp)" stroke="none"/>
+          <path d="M12,44 L50,122 L88,44 Z" fill="url(#hp)" stroke="none"/>
+          <path class="s" d="M12,44 A38,38 0 0 1 88,44"/><path class="s" d="M12,44 L50,122 L88,44"/>
+          <ellipse class="s" cx="50" cy="44" rx="38" ry="9"/>
+          <line class="d" x1="50" y1="44" x2="88" y2="44"/><circle cx="50" cy="44" r="1.8" fill="#222"/><text x="60" y="40">r=3</text>
+          <line class="d" x1="50" y1="44" x2="50" y2="122" style="stroke:#c62828"/><text x="53" y="88" class="r">5</text>
+        </svg>
+        <div class="t">
+          <p><b>semiesfera:</b> <span class="frac"><span>1</span><span>2</span></span>·<span class="frac"><span>4</span><span>3</span></span>π r³ = <span class="frac"><span>2</span><span>3</span></span>π · 27 = <b>18π</b></p>
+          <p><b>cono:</b> <span class="frac"><span>1</span><span>3</span></span>π · 9 · 5 = <b>15π</b></p>
+          <p><b>total:</b> 18π + 15π = 33π</p>
+          <span class="res">V = 33π ≈ 103,67 cm³</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pnum">5</div>
+</div>
+
+<!-- ================= HOJA 6 ================= -->
+<div class="page">
+  <div class="datebox"><span style="top:3mm">AA</span><span style="top:17mm">MM</span><span style="top:31mm">DD</span></div><div class="strip"></div>
+  <div class="grid"></div>
+  <div class="content">
+    <div class="col">
+      <h3 style="margin-top:0">b) Cilindro + cono</h3>
+      <p class="small">diámetro 12 → <span class="hl">r = 6</span> · h<sub>cil</sub> = 8 · h<sub>cono</sub> = 4</p>
+      <div class="row">
+        <svg class="sk" width="130" height="132" viewBox="0 0 130 132">
+          <path d="M10,16 L10,88 L65,126 L120,88 L120,16 Z" fill="url(#ho)" stroke="none"/>
+          <path class="s" d="M10,16 L10,88 L65,126 L120,88 L120,16"/><ellipse class="s" cx="65" cy="16" rx="55" ry="10"/>
+          <path class="d" d="M10,88 A55,10 0 0 0 120,88"/><path class="d" d="M10,88 A55,10 0 0 1 120,88"/>
+          <line class="d" x1="10" y1="16" x2="120" y2="16"/><text x="52" y="12">12</text>
+          <text x="123" y="56" class="r">8</text>
+          <line class="d" x1="65" y1="88" x2="65" y2="126" style="stroke:#c62828"/><text x="69" y="112" class="r">4</text>
+        </svg>
+        <div class="t">
+          <p><b>cilindro:</b> π · 6² · 8 = π · 36 · 8 = <b>288π</b></p>
+          <p><b>cono:</b> <span class="frac"><span>1</span><span>3</span></span>π · 36 · 4 = <b>48π</b></p>
+          <p><b>total:</b> 288π + 48π = 336π</p>
+          <span class="res">V = 336π ≈ 1055,58 cm³</span>
+        </div>
+      </div>
+      <p class="note">ojo: 12 cm es el DIÁMETRO → radio = 12 ÷ 2 = 6</p>
+
+      <h3>Extra: área de los compuestos</h3>
+      <p class="small">(la base que queda "pegada" adentro no cuenta)</p>
+      <p><b>4a)</b> semiesfera 2πr² = 18π + lateral cono π·r·g<br>
+      g = √(3² + 5²) = √34 ≈ 5,83</p>
+      <p>A = 18π + 3√34·π ≈ <span class="red"><b>111,50 cm²</b></span></p>
+      <p><b>4b)</b> tapa 36π + lateral cil. 96π + lateral cono 6π√52</p>
+      <p>A = (132 + 12√13)π ≈ <span class="red"><b>550,62 cm²</b></span></p>
+    </div>
+    <div class="col">
+      <h2 style="margin-top:0">5. Exploro superficies</h2>
+      <p class="note" style="margin-top:0">construcción, área y volumen</p>
+      <p><span class="hl">Desarrollo plano</span> = la figura que queda si "abro" el cuerpo y lo aplano.</p>
+      <ul>
+        <li><b>Área</b> = suma de las figuras del desarrollo (cm²) → el papel que gasto</li>
+        <li><b>Volumen</b> = lo que cabe adentro (cm³)</li>
+      </ul>
+      <h3>Cómo construirlo</h3>
+      <ul>
+        <li>Materiales: cartulina, regla, escuadra, compás, transportador, tijeras, pegante</li>
+        <li>1. Dibujar el desarrollo con las medidas (escala 1:2 si no cabe)</li>
+        <li>2. Dejar pestañas de 1 cm para pegar</li>
+        <li>3. Recortar, marcar dobleces, doblar y pegar</li>
+        <li>4. Calcular área y volumen; comprobar llenándolo con arroz (1 cm³ = 1 mL)</li>
+      </ul>
+      <div class="box tilt2">Uso las medidas del punto 3 para que todo cuadre ✓</div>
+    </div>
+  </div>
+  <div class="pnum">6</div>
+</div>
+
+<!-- ================= HOJA 7 ================= -->
+<div class="page">
+  <div class="datebox"><span style="top:3mm">AA</span><span style="top:17mm">MM</span><span style="top:31mm">DD</span></div><div class="strip"></div>
+  <div class="grid"></div>
+  <div class="content">
+    <div class="col">
+      <h3 style="margin-top:0">Prisma rectangular 6 × 2 × 1</h3>
+      <div class="row">
+        <svg class="sk" width="160" height="124" viewBox="0 0 160 124">
+          <g fill="url(#hb)"><rect class="s" x="22" y="22" width="102" height="34"/><rect class="s" x="22" y="73" width="102" height="34"/></g>
+          <rect class="s" x="22" y="5" width="102" height="17"/><rect class="s" x="22" y="56" width="102" height="17"/>
+          <rect class="s" x="5" y="22" width="17" height="34"/><rect class="s" x="124" y="22" width="17" height="34"/>
+          <text x="58" y="43">6 × 2</text><text x="58" y="17">6 × 1</text><text x="58" y="68">6 × 1</text><text x="58" y="94">6 × 2</text>
+        </svg>
+        <div class="t">
+          <p class="small">2 de 6×2 · 2 de 6×1 · 2 de 2×1</p>
+          <p>A = 2(12 + 6 + 2)</p>
+          <span class="res">A = 40 cm²</span>
+          <p>V = 6·2·1 = <b>12 cm³</b></p>
+        </div>
+      </div>
+
+      <h3>Cilindro r = 6, h = 12</h3>
+      <div class="row">
+        <svg class="sk" width="170" height="100" viewBox="0 0 170 100">
+          <circle class="s" cx="24" cy="24" r="20" fill="url(#hy)"/><circle class="s" cx="24" cy="74" r="20" fill="url(#hy)"/>
+          <rect class="s" x="50" y="22" width="114" height="54" fill="url(#hy)"/>
+          <text x="66" y="54">2πr ≈ 37,7</text><text x="152" y="90" class="r">12</text><text x="22" y="28">r6</text>
+        </svg>
+        <div class="t">
+          <p class="small">2 círculos + rectángulo (2πr × h)</p>
+          <p>A<sub>L</sub> = 2π·6·12 = 144π</p>
+          <p>2 bases = 72π</p>
+          <span class="res">A = 216π ≈ 678,58 cm²</span>
+          <p>V = <b>432π ≈ 1357,17 cm³</b></p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <h3 style="margin-top:0">Cono r = 5, h = 18</h3>
+      <div class="row">
+        <svg class="sk" width="160" height="110" viewBox="0 0 160 110">
+          <path class="s" d="M72,6 L10,62 A84,84 0 0 0 134,62 Z" fill="url(#hb)"/>
+          <circle class="s" cx="140" cy="20" r="15" fill="url(#hb)"/>
+          <text x="30" y="34">g</text><text x="62" y="74" class="r">96,3°</text><text x="132" y="24">r5</text>
+        </svg>
+        <div class="t">
+          <p>g = √(5² + 18²) = √349 ≈ 18,68</p>
+          <p class="small">ángulo = 360° · <span class="frac"><span>r</span><span>g</span></span> ≈ 96,3°</p>
+          <p>A<sub>L</sub> = π·5·18,68 ≈ 293,45</p>
+          <p>A<sub>b</sub> = 25π ≈ 78,54</p>
+        </div>
+      </div>
+      <span class="res">A ≈ 371,99 cm²</span> &nbsp; V = <b>150π ≈ 471,24 cm³</b>
+
+      <h3>Pirámide 25 × 10, h = 12</h3>
+      <div class="row">
+        <svg class="sk" width="150" height="116" viewBox="0 0 150 116">
+          <rect class="s" x="45" y="42" width="60" height="24" fill="url(#ho)"/>
+          <polygon class="s" points="45,42 105,42 75,11"/><polygon class="s" points="45,66 105,66 75,97"/>
+          <polygon class="s" points="45,42 45,66 4,54"/><polygon class="s" points="105,42 105,66 146,54"/>
+          <text x="59" y="58">25×10</text><text x="66" y="36">13</text><text x="14" y="58">17,3</text>
+        </svg>
+        <div class="t">
+          <p class="small">apotema lado 25: √(12²+5²) = <b>13</b></p>
+          <p class="small">apotema lado 10: √(12²+12,5²) ≈ <b>17,33</b></p>
+          <p class="small">A<sub>L</sub> = 325 + 173,28 = 498,28</p>
+          <p class="small">+ base 250</p>
+        </div>
+      </div>
+      <span class="res">A ≈ 748,28 cm²</span> &nbsp; V = <b>1000 cm³</b>
+    </div>
+  </div>
+  <div class="pnum">7</div>
+</div>
+
+<!-- ================= HOJA 8 ================= -->
+<div class="page">
+  <div class="datebox"><span style="top:3mm">AA</span><span style="top:17mm">MM</span><span style="top:31mm">DD</span></div><div class="strip"></div>
+  <div class="grid"></div>
+  <div class="content">
+    <div class="col">
+      <h3 style="margin-top:0">Prisma pentagonal (lado 4, ap 2,75, h 10)</h3>
+      <div class="row">
+        <svg class="sk" width="170" height="104" viewBox="0 0 170 104">
+          <g fill="url(#hb)"><rect class="s" x="10" y="30" width="30" height="44"/><rect class="s" x="40" y="30" width="30" height="44"/><rect class="s" x="70" y="30" width="30" height="44"/><rect class="s" x="100" y="30" width="30" height="44"/><rect class="s" x="130" y="30" width="30" height="44"/></g>
+          <polygon class="s" points="40,30 70,30 79,7 55,-6 31,7" transform="translate(0,0)"/>
+          <polygon class="s" points="40,74 70,74 79,97 55,110 31,97"/>
+          <text x="20" y="56">4×10</text>
+        </svg>
+        <div class="t">
+          <p class="small">2 pentágonos + 5 rectángulos 4×10</p>
+          <p>A<sub>L</sub> = 20 · 10 = 200</p>
+          <p>2 bases = 55</p>
+        </div>
+      </div>
+      <span class="res">A = 255 cm² (recto)</span> &nbsp; V = <b>275 cm³</b>
+      <p class="note">si lo hago inclinado las caras son paralelogramos → más área, mismo volumen</p>
+
+      <h3>Esfera r = 22</h3>
+      <p>A = 4πr² = 4π · 484 = 1936π</p>
+      <span class="res">A ≈ 6082,12 cm²</span> &nbsp; V ≈ <b>44 602,24 cm³</b>
+      <p class="note">la esfera NO tiene desarrollo plano exacto → se aproxima con "gajos" como un balón ⚽</p>
+    </div>
+    <div class="col">
+      <h2 style="margin-top:0">Conclusiones</h2>
+      <ul>
+        <li>Área = superficie que cubre (cm²) · Volumen = espacio que ocupa (cm³)</li>
+        <li>Prisma y cilindro: <b>V = A<sub>b</sub> · h</b></li>
+        <li>Pirámide y cono = <span class="hl"><b>⅓</b> del prisma/cilindro</span> con la misma base y altura (lleno el cono de arroz y lo vacío 3 veces en el cilindro)</li>
+        <li>Mismo volumen ≠ misma área (prisma recto vs. inclinado)</li>
+        <li>Compuestos: el volumen se suma; en el área solo cuenta lo de afuera</li>
+      </ul>
+      <h3>Resultados</h3>
+      <table class="h tilt1">
+        <tr><th>#</th><th>Sólido</th><th>Volumen</th></tr>
+        <tr><td>2.1</td><td>ortoedro 5×3×4</td><td class="red">60 cm³</td></tr>
+        <tr><td>2.2</td><td>cilindro r3 h5</td><td class="red">45π ≈ 141,37</td></tr>
+        <tr><td>3.1</td><td>pirámide 25×10 h12</td><td class="red">1000</td></tr>
+        <tr><td>3.2</td><td>cono r5 h18</td><td class="red">150π ≈ 471,24</td></tr>
+        <tr><td>3.3</td><td>cilindro r6 h12</td><td class="red">432π ≈ 1357,17</td></tr>
+        <tr><td>3.4</td><td>esfera r22</td><td class="red">≈ 44 602,24</td></tr>
+        <tr><td>3.5</td><td>ortoedro 6×2×1</td><td class="red">12</td></tr>
+        <tr><td>3.6</td><td>prisma pentagonal</td><td class="red">275</td></tr>
+        <tr><td>4a</td><td>semiesfera + cono</td><td class="red">33π ≈ 103,67</td></tr>
+        <tr><td>4b</td><td>cilindro + cono</td><td class="red">336π ≈ 1055,58</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="pnum">8</div>
+</div>
+
+<!-- ================= HOJA 9: formulas ================= -->
+<div class="page">
+  <div class="datebox"><span style="top:3mm">AA</span><span style="top:17mm">MM</span><span style="top:31mm">DD</span></div><div class="strip"></div>
+  <div class="grid"></div>
+  <div class="content">
+    <div class="col">
+      <h1>Hoja de fórmulas ★</h1>
+      <p class="note" style="margin-top:0">para repasar antes del parcial</p>
+      <table class="h tilt2" style="font-size:16pt">
+        <tr><th>Cuerpo</th><th>Volumen</th><th>Área total</th></tr>
+        <tr><td>Prisma</td><td>A<sub>b</sub> · h</td><td>P<sub>b</sub>·h + 2A<sub>b</sub></td></tr>
+        <tr><td>Ortoedro</td><td>a · b · c</td><td>2(ab + ac + bc)</td></tr>
+        <tr><td>Cubo</td><td>a³</td><td>6a²</td></tr>
+        <tr><td>Pirámide</td><td><span class="frac"><span>1</span><span>3</span></span> A<sub>b</sub> · h</td><td><span class="frac"><span>P<sub>b</sub>·ap</span><span>2</span></span> + A<sub>b</sub></td></tr>
+        <tr><td>Cilindro</td><td>π r² h</td><td>2πr(h + r)</td></tr>
+        <tr><td>Cono</td><td><span class="frac"><span>1</span><span>3</span></span> π r² h</td><td>πr(g + r)</td></tr>
+        <tr><td>Esfera</td><td><span class="frac"><span>4</span><span>3</span></span> π r³</td><td>4π r²</td></tr>
+      </table>
+      <p>generatriz del cono: <b>g = √(r² + h²)</b></p>
+      <p>área del polígono regular: <b><span class="frac"><span>perímetro · apotema</span><span>2</span></span></b></p>
+    </div>
+    <div class="col">
+      <h2 style="margin-top:2mm">Errores que NO debo cometer</h2>
+      <ul>
+        <li>Usar el <b>diámetro</b> como radio → siempre dividir entre 2 (4b)</li>
+        <li>Olvidar el <b>⅓</b> en pirámide y cono</li>
+        <li>En el prisma inclinado usar la arista inclinada → va la altura ⟂</li>
+        <li>Mezclar unidades: área en cm², volumen en cm³</li>
+        <li>En la semiesfera olvidar el <span class="frac"><span>1</span><span>2</span></span> → <span class="frac"><span>2</span><span>3</span></span>πr³</li>
+      </ul>
+      <div class="box tilt1" style="margin-top:4mm">
+        <b>Para recordar:</b><br>
+        "punta" (pirámide, cono) → <span class="red"><b>÷ 3</b></span><br>
+        "recto de arriba a abajo" (prisma, cilindro) → <span class="red"><b>base × altura</b></span><br>
+        "bola" → <span class="red"><b>4/3 π r³</b></span>
+      </div>
+      <p class="note" style="margin-top:4mm">π ≈ 3,1416 · Euler: C + V − A = 2</p>
+    </div>
+  </div>
+  <div class="pnum">9</div>
+</div>
+
+</body>
+</html>
