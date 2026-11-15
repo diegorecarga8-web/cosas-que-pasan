@@ -7,8 +7,8 @@ Uso: python3 figuras.py   (reescribe los <svg class="sk"> de apuntes.html en ord
 """
 import math, random, re, pathlib
 
-PEN = '#4b4d52'; DASH = '#6f7176'; RED = '#c0473c'
-COL = {'b': '#5b8fd0', 'o': '#e0874a', 'g': '#55a457', 'y': '#d4ae2c', 'p': '#9670c6', 'k': '#d6609a', 'n': '#8a8c91'}
+PEN = '#56575b'; DASH = '#77787c'; RED = '#b8343b'
+COL = {k: '#7d7e82' for k in 'bogypkn'}  # solo grafito, como en el cuaderno
 R = random.Random(42)
 FIGN = [0]
 CUR = [0]
@@ -90,6 +90,7 @@ class Fig:
 
     # ---------------- hatching (colored pencil)
     def hatch(self, pts, color, spacing=4.0, angle=45, op=0.6, sw=0.95, shade_clip=None, evenodd=False, path_d=None):
+        op *= 0.55  # sombreado suave, el dibujo es sobre todo de línea
         cid = self.uid()
         d = path_d or ('M' + ' L'.join(f'{f(x)},{f(y)}' for x, y in pts) + ' Z')
         rule = ' clip-rule="evenodd"' if evenodd else ''
