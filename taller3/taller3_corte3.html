@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Taller 3 Corte 3 – Pensamiento Lógico</title>
+<style>
+  @page { size: Letter; margin: 18mm 17mm 18mm 17mm; }
+  :root { --ink:#1d2433; --muted:#5b6475; --accent:#1f5fa8; --accent2:#c2410c; --soft:#eef4fb; --soft2:#fdf3ec; --line:#d6dde8; }
+  * { box-sizing: border-box; }
+  body { font-family: "DejaVu Serif", Georgia, serif; color: var(--ink); font-size: 10.6pt; line-height: 1.45; margin: 0; background:#fff; }
+  h1,h2,h3 { font-family: "DejaVu Sans", Arial, sans-serif; }
+  .cover { text-align:center; border-bottom: 3px solid var(--accent); padding-bottom: 10px; margin-bottom: 14px; }
+  .cover .u { font-family:"DejaVu Sans",sans-serif; font-weight:bold; letter-spacing:1px; font-size:13pt; }
+  .cover .s { font-family:"DejaVu Sans",sans-serif; color:var(--muted); font-size:10.5pt; }
+  .cover h1 { margin:6px 0 2px; font-size:19pt; color:var(--accent); }
+  .meta { display:grid; grid-template-columns: 1fr 1fr; gap:4px 24px; font-family:"DejaVu Sans",sans-serif; font-size:9.5pt; margin: 8px auto 0; max-width: 520px; text-align:left; }
+  .meta span { border-bottom: 1px solid #999; display:inline-block; min-width: 170px; }
+  h2 { font-size: 13.5pt; color:#fff; background: var(--accent); padding: 5px 10px; border-radius: 4px; margin: 18px 0 8px; break-after: avoid; }
+  h3 { font-size: 11pt; color: var(--accent); margin: 12px 0 4px; break-after: avoid; }
+  p { margin: 4px 0 6px; }
+  .enun { font-style: italic; color: var(--muted); margin-bottom: 8px; }
+  .grid2 { display:grid; grid-template-columns: 1fr 1fr; gap: 10px 14px; }
+  .grid3 { display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .card { border:1px solid var(--line); border-radius:6px; padding:8px 10px; break-inside: avoid; background:#fff; }
+  .card h3 { margin-top: 0; }
+  .card svg { display:block; margin: 2px auto 4px; }
+  ul { margin: 2px 0 4px 0; padding-left: 18px; }
+  li { margin: 1px 0; }
+  table { border-collapse: collapse; width:100%; font-size:9.6pt; margin: 6px 0; break-inside: avoid; }
+  th, td { border: 1px solid var(--line); padding: 4px 6px; text-align:center; }
+  th { background: var(--soft); font-family:"DejaVu Sans",sans-serif; font-size:9pt; }
+  .calc { background: var(--soft); border-left: 3px solid var(--accent); padding: 6px 10px; margin: 6px 0; break-inside: avoid; font-size: 10.4pt; }
+  .calc div { margin: 3px 0; }
+  .ans { display:inline-block; background: var(--soft2); border:1.5px solid var(--accent2); color:#7a2a07; font-weight:bold; padding: 2px 8px; border-radius:4px; margin-top:3px; font-family:"DejaVu Sans",sans-serif; font-size:10pt; }
+  .note { font-size:9.3pt; color: var(--muted); border-left: 3px solid #b9c3d3; padding: 3px 8px; margin: 6px 0; }
+  .frac { display:inline-flex; flex-direction:column; vertical-align: middle; text-align:center; margin: 0 2px; font-size: 0.92em; line-height:1.15; }
+  .frac > span:first-child { border-bottom: 1px solid currentColor; padding: 0 3px; }
+  .frac > span:last-child { padding: 0 3px; }
+  .big { font-size: 1.08em; }
+  .formula { font-family:"DejaVu Sans",sans-serif; font-weight:bold; color: var(--accent); }
+  .euler { font-family:"DejaVu Sans",sans-serif; font-size: 9pt; color: #166534; background:#ecfdf3; border-radius:3px; padding: 1px 6px; display:inline-block; margin-top: 3px; }
+  .flex { display:flex; gap: 12px; align-items:flex-start; }
+  .flex > .txt { flex: 1; }
+  .pb { break-before: page; }
+  .summary td:first-child, .summary th:first-child { text-align:left; }
+  .steps li { margin: 2px 0; }
+  .tag { font-family:"DejaVu Sans",sans-serif; font-size:8.5pt; background:var(--accent); color:#fff; border-radius:3px; padding:0 5px; margin-right:4px; }
+  svg text { font-family: "DejaVu Sans", sans-serif; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="u">UNIVERSIDAD SIMÓN BOLÍVAR</div>
+  <div class="s">Pensamiento Lógico</div>
+  <h1>Taller 3 · Corte 3 — Cuerpos geométricos, áreas y volúmenes</h1>
+  <div class="meta">
+    <div>Estudiante: <span>&nbsp;</span></div>
+    <div>Código: <span>&nbsp;</span></div>
+    <div>Docente: <span>&nbsp;</span></div>
+    <div>Fecha: <span>&nbsp;</span></div>
+  </div>
+</div>
+
+<!-- ===================== PUNTO 1 ===================== -->
+<h2>1. Características de los cuerpos geométricos</h2>
+<p class="enun">Escribe las características de los siguientes cuerpos geométricos.</p>
+<p>Los cuerpos geométricos se dividen en <b>poliedros</b> (todas sus caras son polígonos planos: a, b, d) y <b>cuerpos redondos</b> (tienen al menos una superficie curva: c, e, f). En los poliedros se cumple la <b>fórmula de Euler</b>: <span class="formula">C + V − A = 2</span> (caras + vértices − aristas).</p>
+
+<div class="grid2">
+  <div class="card">
+    <h3>a) Prisma hexagonal (poliedro)</h3>
+    <div class="flex">
+      <svg width="92" height="112" viewBox="0 0 92 112">
+        <g stroke="#1f5fa8" stroke-width="1.4" fill="#cfe6f7">
+          <polygon points="16,14 34,6 58,6 76,14 58,22 34,22" fill="#e3f1fb"/>
+          <polygon points="16,14 34,22 34,100 16,92"/>
+          <polygon points="34,22 58,22 58,100 34,100" fill="#b7daf2"/>
+          <polygon points="58,22 76,14 76,92 58,100"/>
+        </g>
+        <g stroke="#1f5fa8" stroke-width="1" stroke-dasharray="3,2" fill="none">
+          <polyline points="16,92 34,84 58,84 76,92"/><line x1="34" y1="6" x2="34" y2="84"/><line x1="58" y1="6" x2="58" y2="84"/>
+        </g>
+      </svg>
+      <div class="txt"><ul>
+        <li>2 bases: hexágonos iguales y paralelos.</li>
+        <li>6 caras laterales: rectángulos.</li>
+        <li><b>Caras: 8 · Aristas: 18 · Vértices: 12</b>.</li>
+        <li>Es un prisma recto (aristas laterales ⟂ a las bases).</li>
+        <li>V = A<sub>b</sub>·h.</li>
+      </ul><span class="euler">Euler: 8 + 12 − 18 = 2 ✓</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>b) Pirámide cuadrangular (poliedro)</h3>
+    <div class="flex">
+      <svg width="112" height="100" viewBox="0 0 112 100">
+        <g stroke="#c2410c" stroke-width="1.4" fill="#f9d5bf">
+          <polygon points="56,8 8,74 64,90" />
+          <polygon points="56,8 64,90 104,66" fill="#f4bd9c"/>
+        </g>
+        <g stroke="#c2410c" stroke-width="1" stroke-dasharray="3,2" fill="none">
+          <polyline points="8,74 48,52 104,66"/><line x1="56" y1="8" x2="48" y2="52"/><line x1="56" y1="8" x2="56" y2="70"/>
+        </g>
+        <text x="58" y="50" font-size="8" fill="#7a2a07">h</text>
+      </svg>
+      <div class="txt"><ul>
+        <li>1 base: cuadrado.</li>
+        <li>4 caras laterales: triángulos que concurren en la <b>cúspide</b>.</li>
+        <li><b>Caras: 5 · Aristas: 8 · Vértices: 5</b>.</li>
+        <li>Altura: distancia de la cúspide a la base.</li>
+        <li>V = ⅓·A<sub>b</sub>·h.</li>
+      </ul><span class="euler">Euler: 5 + 5 − 8 = 2 ✓</span></div>
+    </div>
+  </div>
+</div>
+<div class="grid2" style="margin-top:10px">
+  <div class="card">
+    <h3>c) Cono (cuerpo redondo)</h3>
+    <div class="flex">
+      <svg width="92" height="104" viewBox="0 0 92 104">
+        <path d="M46,6 L10,86 A36,10 0 0 0 82,86 Z" fill="#cfe8cf" stroke="#2f7d32" stroke-width="1.4"/>
+        <path d="M10,86 A36,10 0 0 1 82,86" fill="none" stroke="#2f7d32" stroke-dasharray="3,2"/>
+        <line x1="46" y1="6" x2="46" y2="86" stroke="#2f7d32" stroke-dasharray="3,2"/>
+        <line x1="46" y1="86" x2="82" y2="86" stroke="#2f7d32" stroke-dasharray="3,2"/>
+        <text x="49" y="52" font-size="8">h</text><text x="62" y="83" font-size="8">r</text><text x="68" y="46" font-size="8">g</text>
+      </svg>
+      <div class="txt"><ul>
+        <li>1 base circular y 1 superficie lateral curva.</li>
+        <li>1 vértice (cúspide); no tiene aristas rectas.</li>
+        <li>Elementos: radio r, altura h, generatriz g.</li>
+        <li>Se genera al girar un triángulo rectángulo sobre un cateto.</li>
+        <li>V = ⅓·π r² h.</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>d) Cubo o hexaedro regular (poliedro)</h3>
+    <div class="flex">
+      <svg width="92" height="92" viewBox="0 0 92 92">
+        <g stroke="#a16207" stroke-width="1.4">
+          <polygon points="8,28 60,28 60,82 8,82" fill="#fff6c7"/>
+          <polygon points="8,28 30,8 82,8 60,28" fill="#fffbe3"/>
+          <polygon points="60,28 82,8 82,62 60,82" fill="#fdeea0"/>
+        </g>
+        <g stroke="#a16207" stroke-dasharray="3,2" fill="none"><polyline points="8,82 30,62 82,62"/><line x1="30" y1="8" x2="30" y2="62"/></g>
+      </svg>
+      <div class="txt"><ul>
+        <li>6 caras: cuadrados iguales.</li>
+        <li><b>Caras: 6 · Aristas: 12 · Vértices: 8</b>.</li>
+        <li>Todas las aristas miden lo mismo (a).</li>
+        <li>Es un poliedro regular y un prisma cuadrangular.</li>
+        <li>V = a³; A = 6a².</li>
+      </ul><span class="euler">Euler: 6 + 8 − 12 = 2 ✓</span></div>
+    </div>
+  </div>
+</div>
+<div class="grid2" style="margin-top:10px">
+  <div class="card">
+    <h3>e) Cilindro (cuerpo redondo)</h3>
+    <div class="flex">
+      <svg width="80" height="104" viewBox="0 0 80 104">
+        <path d="M8,16 L8,88 A32,9 0 0 0 72,88 L72,16" fill="#fbef7a" stroke="#a16207" stroke-width="1.4"/>
+        <ellipse cx="40" cy="16" rx="32" ry="9" fill="#fff7b0" stroke="#a16207" stroke-width="1.4"/>
+        <path d="M8,88 A32,9 0 0 1 72,88" fill="none" stroke="#a16207" stroke-dasharray="3,2"/>
+      </svg>
+      <div class="txt"><ul>
+        <li>2 bases: círculos iguales y paralelos.</li>
+        <li>1 superficie lateral curva (al desplegarla es un rectángulo).</li>
+        <li>No tiene vértices ni aristas rectas.</li>
+        <li>Se genera al girar un rectángulo sobre uno de sus lados.</li>
+        <li>V = π r² h.</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>f) Esfera (cuerpo redondo)</h3>
+    <div class="flex">
+      <svg width="92" height="92" viewBox="0 0 92 92">
+        <circle cx="46" cy="46" r="40" fill="#a7dca7" stroke="#2f7d32" stroke-width="1.4"/>
+        <path d="M6,46 A40,9 0 0 0 86,46" fill="none" stroke="#222" stroke-width="2"/>
+        <path d="M6,46 A40,9 0 0 1 86,46" fill="none" stroke="#222" stroke-dasharray="3,2"/>
+        <circle cx="46" cy="46" r="2.5" fill="#fde047" stroke="#222"/>
+        <line x1="46" y1="46" x2="86" y2="46" stroke="#222" stroke-dasharray="2,2"/><text x="62" y="42" font-size="8">r</text>
+      </svg>
+      <div class="txt"><ul>
+        <li>Una sola superficie curva y cerrada.</li>
+        <li>Todos sus puntos están a la misma distancia (r) del centro.</li>
+        <li>No tiene caras planas, aristas ni vértices.</li>
+        <li>Se genera al girar un semicírculo sobre su diámetro.</li>
+        <li>V = <span class="frac"><span>4</span><span>3</span></span>π r³; A = 4π r².</li>
+      </ul></div>
+    </div>
+  </div>
+</div>
+
+<table class="summary">
+  <tr><th>Cuerpo</th><th>Tipo</th><th>Caras / superficies</th><th>Aristas</th><th>Vértices</th></tr>
+  <tr><td>a) Prisma hexagonal</td><td>Poliedro</td><td>8 (2 hexágonos + 6 rectángulos)</td><td>18</td><td>12</td></tr>
+  <tr><td>b) Pirámide cuadrangular</td><td>Poliedro</td><td>5 (1 cuadrado + 4 triángulos)</td><td>8</td><td>5</td></tr>
+  <tr><td>c) Cono</td><td>Redondo</td><td>1 base circular + 1 superficie curva</td><td>0</td><td>1</td></tr>
+  <tr><td>d) Cubo</td><td>Poliedro regular</td><td>6 cuadrados</td><td>12</td><td>8</td></tr>
+  <tr><td>e) Cilindro</td><td>Redondo</td><td>2 bases circulares + 1 superficie curva</td><td>0</td><td>0</td></tr>
+  <tr><td>f) Esfera</td><td>Redondo</td><td>1 superficie curva</td><td>0</td><td>0</td></tr>
+</table>
+
+<!-- ===================== PUNTO 2 ===================== -->
+<div style="break-inside:avoid">
+<h2>2. Situaciones: construir sólidos apilando capas</h2>
+<p class="enun">Observa las siguientes situaciones, luego contesta.</p>
+<p>Idea clave (<b>principio de Cavalieri</b>): si un sólido se forma apilando capas iguales, su volumen es <b>área de la capa × número de capas</b>, es decir, <span class="formula">V = A<sub>base</sub> × h</span>.</p>
+
+<div class="card">
+  <h3>Situación 1: cubitos de 1 cm³ formando una base de 5 cm × 3 cm × 1 cm</h3>
+  <div class="flex">
+    <svg width="190" height="140" viewBox="0 0 190 140">
+      <!-- 4 capas apiladas: frente 5x? -->
+      <g stroke="#9d174d" stroke-width="1">
+        <polygon points="10,40 130,40 130,128 10,128" fill="#fbcfe8"/>
+        <polygon points="10,40 46,16 166,16 130,40" fill="#fde7f3"/>
+        <polygon points="130,40 166,16 166,104 130,128" fill="#f5a9cf"/>
+      </g>
+      <g stroke="#9d174d" stroke-width="0.6" opacity="0.8">
+        <line x1="34" y1="40" x2="34" y2="128"/><line x1="58" y1="40" x2="58" y2="128"/><line x1="82" y1="40" x2="82" y2="128"/><line x1="106" y1="40" x2="106" y2="128"/>
+        <line x1="10" y1="62" x2="130" y2="62"/><line x1="10" y1="84" x2="130" y2="84"/><line x1="10" y1="106" x2="130" y2="106"/>
+        <line x1="130" y1="62" x2="166" y2="38"/><line x1="130" y1="84" x2="166" y2="60"/><line x1="130" y1="106" x2="166" y2="82"/>
+        <line x1="142" y1="32" x2="142" y2="120"/><line x1="154" y1="24" x2="154" y2="112"/>
+      </g>
+      <text x="60" y="138" font-size="9">5 cm</text>
+      <text x="152" y="128" font-size="9">3 cm</text>
+      <text x="168" y="64" font-size="9">4 cm</text>
+    </svg>
+    <div class="txt">
+      <p><b>a) ¿Qué sólido se obtiene si se apilan 4 bloques?</b><br>
+      Se obtiene un <b>prisma rectangular (ortoedro o paralelepípedo rectángulo)</b> de 5 cm de largo, 3 cm de ancho y 4 cm de alto.</p>
+      <p><b>b) Volumen del sólido formado</b></p>
+      <div class="calc">
+        <div>Cubitos en un bloque: 5 × 3 × 1 = 15 cubitos → V<sub>bloque</sub> = 15 cm³</div>
+        <div>Al apilar 4 bloques: V = 15 cm³ × 4 = 60 cm³</div>
+        <div>Comprobación con la fórmula: V = l·a·h = 5 · 3 · 4 = 60 cm³</div>
+        <span class="ans">V = 60 cm³</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+<div class="card" style="margin-top:10px">
+  <h3>Situación 2: disco de radio 3 cm y altura 1 cm (área de la base = 9π cm²)</h3>
+  <div class="flex">
+    <svg width="190" height="150" viewBox="0 0 190 150">
+      <g stroke="#475569" stroke-width="1">
+        <path d="M30,120 L30,130 A60,14 0 0 0 150,130 L150,120" fill="#cbd5e1"/>
+        <path d="M30,100 L30,120 A60,14 0 0 0 150,120 L150,100" fill="#d6dde6"/>
+        <path d="M30,80 L30,100 A60,14 0 0 0 150,100 L150,80" fill="#cbd5e1"/>
+        <path d="M30,60 L30,80 A60,14 0 0 0 150,80 L150,60" fill="#d6dde6"/>
+        <path d="M30,40 L30,60 A60,14 0 0 0 150,60 L150,40" fill="#cbd5e1"/>
+        <ellipse cx="90" cy="40" rx="60" ry="14" fill="#eef2f6"/>
+      </g>
+      <path d="M30,30 L30,30" />
+      <g stroke="#475569" stroke-width="0.8" fill="none">
+        <path d="M30,60 A60,14 0 0 0 150,60"/><path d="M30,80 A60,14 0 0 0 150,80"/><path d="M30,100 A60,14 0 0 0 150,100"/><path d="M30,120 A60,14 0 0 0 150,120"/>
+      </g>
+      <line x1="90" y1="40" x2="150" y2="40" stroke="#111" stroke-dasharray="3,2"/><text x="112" y="36" font-size="9">3 cm</text>
+      <line x1="160" y1="40" x2="160" y2="130" stroke="#111"/><text x="164" y="90" font-size="9">5 cm</text>
+    </svg>
+    <div class="txt">
+      <p><b>a) ¿Qué sólido se obtiene si se apilan 5 discos?</b><br>
+      Se obtiene un <b>cilindro</b> de radio 3 cm y altura 5 cm (5 discos × 1 cm).</p>
+      <p><b>b) Volumen del sólido formado</b></p>
+      <div class="calc">
+        <div>Volumen de un disco: V<sub>disco</sub> = A<sub>base</sub> · h = 9π · 1 = 9π cm³</div>
+        <div>Al apilar 5 discos: V = 9π × 5 = 45π cm³</div>
+        <div>Con la fórmula: V = π r² h = π · 3² · 5 = 45π cm³ ≈ 141,37 cm³</div>
+        <span class="ans">V = 45π cm³ ≈ 141,37 cm³</span>
+      </div>
+    </div>
+  </div>
+  <p class="note">Conclusión de ambas situaciones: el volumen de cualquier prisma o cilindro se deduce como “área de la base × altura”, porque la altura indica cuántas capas de esa base se apilan.</p>
+</div>
+
+<!-- ===================== PUNTO 3 ===================== -->
+<h2>3. Volumen de los siguientes sólidos</h2>
+
+<div class="grid2">
+  <div class="card">
+    <h3>3.1 Pirámide de base rectangular</h3>
+    <p>Base: 25 cm × 10 cm; altura h = 12 cm.</p>
+    <div class="calc">
+      <div>A<sub>b</sub> = 25 · 10 = 250 cm²</div>
+      <div>V = <span class="frac"><span>1</span><span>3</span></span> · A<sub>b</sub> · h = <span class="frac"><span>1</span><span>3</span></span> · 250 · 12 = <span class="frac"><span>3000</span><span>3</span></span></div>
+      <span class="ans">V = 1000 cm³</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>3.2 Cono</h3>
+    <p>Radio r = 5 cm; altura h = 18 cm.</p>
+    <div class="calc">
+      <div>V = <span class="frac"><span>1</span><span>3</span></span> π r² h = <span class="frac"><span>1</span><span>3</span></span> π · 5² · 18</div>
+      <div>V = <span class="frac"><span>1</span><span>3</span></span> π · 25 · 18 = <span class="frac"><span>450π</span><span>3</span></span> = 150π</div>
+      <span class="ans">V = 150π cm³ ≈ 471,24 cm³</span>
+    </div>
+  </div>
+</div>
+<div class="grid2" style="margin-top:10px">
+  <div class="card">
+    <h3>3.3 Cilindro</h3>
+    <p>Radio r = 6 cm; altura h = 12 cm.</p>
+    <div class="calc">
+      <div>V = π r² h = π · 6² · 12</div>
+      <div>V = π · 36 · 12 = 432π</div>
+      <span class="ans">V = 432π cm³ ≈ 1357,17 cm³</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>3.4 Esfera</h3>
+    <p>Radio r = 22 cm (segmento del centro a la superficie).</p>
+    <div class="calc">
+      <div>V = <span class="frac"><span>4</span><span>3</span></span> π r³ = <span class="frac"><span>4</span><span>3</span></span> π · 22³ = <span class="frac"><span>4</span><span>3</span></span> π · 10 648</div>
+      <div>V = <span class="frac"><span>42 592</span><span>3</span></span> π ≈ 14 197,33 π</div>
+      <span class="ans">V ≈ 44 602,24 cm³</span>
+    </div>
+  </div>
+</div>
+<div class="grid2" style="margin-top:10px">
+  <div class="card">
+    <h3>3.5 Prisma rectangular (ortoedro)</h3>
+    <p>Largo 6 cm; ancho 2 cm; alto 1 cm.</p>
+    <div class="calc">
+      <div>V = l · a · h = 6 · 2 · 1</div>
+      <span class="ans">V = 12 cm³</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>3.6 Prisma pentagonal oblicuo</h3>
+    <p>Base: pentágono regular de lado 4 cm y apotema 2,75 cm; altura h = 10 cm.</p>
+    <div class="calc">
+      <div>Perímetro de la base: P = 5 · 4 = 20 cm</div>
+      <div>A<sub>b</sub> = <span class="frac"><span>P · ap</span><span>2</span></span> = <span class="frac"><span>20 · 2,75</span><span>2</span></span> = 27,5 cm²</div>
+      <div>V = A<sub>b</sub> · h = 27,5 · 10</div>
+      <span class="ans">V = 275 cm³</span>
+    </div>
+    <p class="note">Aunque el prisma está inclinado, su volumen es igual al de un prisma recto con la misma base y la misma altura (principio de Cavalieri). Por eso se usa la altura perpendicular (10 cm) y no la longitud de la arista lateral.</p>
+  </div>
+</div>
+
+<!-- ===================== PUNTO 4 ===================== -->
+<h2>4. Volumen de sólidos compuestos</h2>
+<p>Un sólido compuesto se descompone en cuerpos conocidos; su volumen es la <b>suma</b> de los volúmenes de las partes.</p>
+
+<div class="card">
+  <h3>a) Semiesfera + cono (r = 3 cm, altura del cono = 5 cm)</h3>
+  <div class="flex">
+    <svg width="130" height="150" viewBox="0 0 130 150">
+      <path d="M20,52 A45,45 0 0 1 110,52 Z" fill="#ddd0ef" stroke="#6b4fa0" stroke-width="1.3"/>
+      <path d="M20,52 L65,142 L110,52 Z" fill="#cbb8e6" stroke="#6b4fa0" stroke-width="1.3"/>
+      <ellipse cx="65" cy="52" rx="45" ry="10" fill="#b9a2dc" stroke="#6b4fa0" stroke-width="1"/>
+      <line x1="65" y1="52" x2="110" y2="52" stroke="#222" stroke-dasharray="3,2"/><circle cx="65" cy="52" r="2"/>
+      <text x="76" y="48" font-size="9">r = 3</text>
+      <line x1="120" y1="52" x2="120" y2="142" stroke="#222"/><text x="104" y="100" font-size="9">5</text>
+    </svg>
+    <div class="txt">
+      <div class="calc">
+        <div><span class="tag">Semiesfera</span> V<sub>1</sub> = <span class="frac"><span>1</span><span>2</span></span> · <span class="frac"><span>4</span><span>3</span></span> π r³ = <span class="frac"><span>2</span><span>3</span></span> π · 3³ = <span class="frac"><span>2</span><span>3</span></span> π · 27 = 18π cm³</div>
+        <div><span class="tag">Cono</span> V<sub>2</sub> = <span class="frac"><span>1</span><span>3</span></span> π r² h = <span class="frac"><span>1</span><span>3</span></span> π · 9 · 5 = 15π cm³</div>
+        <div><span class="tag">Total</span> V = V<sub>1</sub> + V<sub>2</sub> = 18π + 15π = 33π cm³</div>
+        <span class="ans">V = 33π cm³ ≈ 103,67 cm³</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="margin-top:10px">
+  <h3>b) Cilindro + cono (diámetro 12 cm → r = 6 cm; cilindro h = 8 cm; cono h = 4 cm)</h3>
+  <div class="flex">
+    <svg width="150" height="150" viewBox="0 0 150 150">
+      <path d="M15,20 L15,100 L75,140 L135,100 L135,20" fill="#fcc98a" stroke="#b45309" stroke-width="1.3"/>
+      <ellipse cx="75" cy="20" rx="60" ry="10" fill="#fde0b8" stroke="#b45309" stroke-width="1.2"/>
+      <path d="M15,100 A60,10 0 0 0 135,100" fill="none" stroke="#b45309" stroke-dasharray="3,2"/>
+      <path d="M15,100 A60,10 0 0 1 135,100" fill="none" stroke="#b45309" stroke-dasharray="3,2"/>
+      <line x1="15" y1="20" x2="135" y2="20" stroke="#222" stroke-dasharray="3,2"/><text x="60" y="16" font-size="9">12 cm</text>
+      <line x1="142" y1="20" x2="142" y2="100" stroke="#222"/><text x="122" y="62" font-size="9">8</text>
+      <line x1="75" y1="100" x2="75" y2="140" stroke="#222" stroke-dasharray="2,2"/><text x="79" y="124" font-size="9">4</text>
+    </svg>
+    <div class="txt">
+      <div class="calc">
+        <div><span class="tag">Cilindro</span> V<sub>1</sub> = π r² h = π · 6² · 8 = π · 36 · 8 = 288π cm³</div>
+        <div><span class="tag">Cono</span> V<sub>2</sub> = <span class="frac"><span>1</span><span>3</span></span> π r² h = <span class="frac"><span>1</span><span>3</span></span> π · 36 · 4 = 48π cm³</div>
+        <div><span class="tag">Total</span> V = 288π + 48π = 336π cm³</div>
+        <span class="ans">V = 336π cm³ ≈ 1055,58 cm³</span>
+      </div>
+    </div>
+  </div>
+  <p class="note">Ojo: el 12 cm es el <b>diámetro</b> de la base, por eso el radio es 12 ÷ 2 = 6 cm. El cono comparte la misma base que el cilindro.</p>
+</div>
+
+<h3>Complemento: área superficial de los sólidos compuestos</h3>
+<table>
+  <tr><th>Sólido</th><th>Superficies expuestas</th><th>Área total</th></tr>
+  <tr><td>4a) Semiesfera + cono</td><td>Semiesfera curva 2πr² = 18π; lateral del cono πrg, con g = √(3² + 5²) = √34 ≈ 5,83</td><td>18π + 3√34·π ≈ <b>111,50 cm²</b></td></tr>
+  <tr><td>4b) Cilindro + cono</td><td>Tapa 36π; lateral cilindro 2π·6·8 = 96π; lateral cono π·6·√52 ≈ 43,27π</td><td>(132 + 12√13)π ≈ <b>550,62 cm²</b></td></tr>
+</table>
+<p class="note">Las caras que quedan “pegadas” (la base común entre las dos piezas) no se cuentan porque quedan dentro del sólido.</p>
+
+<!-- ===================== PUNTO 5 ===================== -->
+<h2>5. Actividad didáctica: exploro superficies — construcción, área y volumen</h2>
+<p>La actividad consiste en <b>construir</b> cada cuerpo a partir de su <b>desarrollo plano</b> (la figura que se obtiene al “desdoblar” su superficie), y con él deducir su <b>área</b> (lo que mide el papel usado) y su <b>volumen</b> (lo que cabe dentro). Para que todo sea coherente, se usan las medidas de los sólidos del punto 3.</p>
+
+<h3>Materiales y procedimiento de construcción</h3>
+<ul class="steps">
+  <li><b>Materiales:</b> cartulina, regla, escuadra, compás, transportador, tijeras, pegante y lápiz.</li>
+  <li><b>Paso 1:</b> dibujar el desarrollo plano con las medidas indicadas (se puede trabajar a escala 1:2 si la figura no cabe).</li>
+  <li><b>Paso 2:</b> agregar pestañas de 1 cm en aristas alternas para poder pegar.</li>
+  <li><b>Paso 3:</b> recortar, marcar los dobleces con la regla, doblar y pegar.</li>
+  <li><b>Paso 4:</b> calcular el área sumando las figuras del desarrollo y el volumen con la fórmula; comprobar llenando el cuerpo con arroz o arena y midiendo con un vaso medidor (1 cm³ = 1 mL).</li>
+</ul>
+
+<div class="grid2" style="margin-top:8px">
+  <div class="card">
+    <h3>Prisma rectangular 6 × 2 × 1 cm</h3>
+    <svg width="250" height="136" viewBox="0 0 250 136">
+      <g stroke="#1f5fa8" fill="#dbeafe" stroke-width="1.2">
+        <rect x="20" y="40" width="18" height="36"/><rect x="38" y="40" width="108" height="36" fill="#bfdbfe"/>
+        <rect x="146" y="40" width="18" height="36"/>
+        <rect x="38" y="22" width="108" height="18"/><rect x="38" y="76" width="108" height="18"/>
+        <rect x="38" y="94" width="108" height="36" fill="#bfdbfe"/>
+      </g>
+      <text x="80" y="62" font-size="9">6 × 2</text><text x="78" y="34" font-size="8">6 × 1</text><text x="78" y="88" font-size="8">6 × 1</text><text x="80" y="116" font-size="8">6 × 2</text><text x="22" y="62" font-size="7">2×1</text><text x="148" y="62" font-size="7">2×1</text>
+    </svg>
+    <div class="calc">
+      <div>Desarrollo: 2 rectángulos 6×2, 2 de 6×1 y 2 de 2×1.</div>
+      <div>A = 2(6·2 + 6·1 + 2·1) = 2(12 + 6 + 2) = <b>40 cm²</b></div>
+      <div>V = 6 · 2 · 1 = <b>12 cm³</b></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Cilindro r = 6 cm, h = 12 cm</h3>
+    <svg width="250" height="120" viewBox="0 0 250 120">
+      <g stroke="#a16207" stroke-width="1.2">
+        <rect x="70" y="30" width="155" height="60" fill="#fef3a0"/>
+        <circle cx="40" cy="30" r="26" fill="#fff7c2"/><circle cx="40" cy="90" r="26" fill="#fff7c2"/>
+      </g>
+      <text x="96" y="64" font-size="9">2πr = 12π ≈ 37,7 cm</text><text x="229" y="64" font-size="9">12</text>
+      <line x1="40" y1="30" x2="66" y2="30" stroke="#222" stroke-dasharray="2,2"/><text x="44" y="27" font-size="8">6</text>
+    </svg>
+    <div class="calc">
+      <div>Desarrollo: 2 círculos de r = 6 y un rectángulo de 2πr × h.</div>
+      <div>A<sub>L</sub> = 2π·6·12 = 144π; &nbsp; 2A<sub>b</sub> = 2·π·36 = 72π</div>
+      <div>A<sub>T</sub> = 216π ≈ <b>678,58 cm²</b> &nbsp;·&nbsp; V = 432π ≈ <b>1357,17 cm³</b></div>
+    </div>
+  </div>
+</div>
+<div class="grid2" style="margin-top:10px">
+  <div class="card">
+    <h3>Cono r = 5 cm, h = 18 cm</h3>
+    <svg width="250" height="130" viewBox="0 0 250 130">
+      <path d="M110,10 L28.1,83.4 A110,110 0 0 0 191.9,83.4 Z" fill="#bfe3f5" stroke="#0369a1" stroke-width="1.2"/>
+      <circle cx="222" cy="40" r="22" fill="#dff1fa" stroke="#0369a1" stroke-width="1.2"/>
+      <text x="70" y="58" font-size="9">g ≈ 18,68</text><text x="80" y="96" font-size="8">sector ≈ 96,3°</text><text x="212" y="44" font-size="9">r=5</text>
+    </svg>
+    <div class="calc">
+      <div>Generatriz: g = √(5² + 18²) = √349 ≈ 18,68 cm</div>
+      <div>Ángulo del sector: 360° · r/g = 360° · 5/18,68 ≈ 96,3°</div>
+      <div>A<sub>L</sub> = π·5·18,68 ≈ 293,45 cm²; A<sub>b</sub> = 25π ≈ 78,54 cm²</div>
+      <div>A<sub>T</sub> ≈ <b>371,99 cm²</b> &nbsp;·&nbsp; V = 150π ≈ <b>471,24 cm³</b></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Pirámide de base 25 × 10 cm, h = 12 cm</h3>
+    <svg width="260" height="152" viewBox="0 0 260 152">
+      <g stroke="#c2410c" stroke-width="1.2" fill="#fde2d0">
+        <rect x="80" y="56" width="100" height="40" fill="#fbcfb0"/>
+        <polygon points="80,56 180,56 130,4"/><polygon points="80,96 180,96 130,148"/>
+        <polygon points="80,56 80,96 11,76"/><polygon points="180,56 180,96 249,76"/>
+      </g>
+      <text x="110" y="80" font-size="9">25 × 10</text><text x="116" y="44" font-size="8">ap 13</text><text x="36" y="79" font-size="7">ap 17,3</text>
+    </svg>
+    <div class="calc">
+      <div>Apotema sobre el lado 25: √(12² + 5²) = √169 = 13 cm</div>
+      <div>Apotema sobre el lado 10: √(12² + 12,5²) = √300,25 ≈ 17,33 cm</div>
+      <div>A<sub>L</sub> = 2·(25·13)/2 + 2·(10·17,33)/2 = 325 + 173,28 = 498,28 cm²</div>
+      <div>A<sub>T</sub> = 498,28 + 250 ≈ <b>748,28 cm²</b> &nbsp;·&nbsp; V = <b>1000 cm³</b></div>
+    </div>
+  </div>
+</div>
+<div class="grid2" style="margin-top:10px">
+  <div class="card">
+    <h3>Prisma pentagonal (lado 4, ap 2,75, h 10)</h3>
+    <div class="calc">
+      <div>Desarrollo (prisma recto equivalente): 2 pentágonos + 5 rectángulos de 4 × 10.</div>
+      <div>A<sub>L</sub> = P·h = 20·10 = 200 cm²; &nbsp; 2A<sub>b</sub> = 2·27,5 = 55 cm²</div>
+      <div>A<sub>T</sub> = <b>255 cm²</b> (si es recto) &nbsp;·&nbsp; V = <b>275 cm³</b></div>
+    </div>
+    <p class="note">Si se construye inclinado, las caras laterales son paralelogramos y el área lateral aumenta (depende de la longitud de la arista inclinada), pero el volumen sigue siendo 275 cm³.</p>
+  </div>
+
+  <div class="card">
+    <h3>Esfera r = 22 cm</h3>
+    <div class="calc">
+      <div>A = 4π r² = 4π · 484 = 1936π ≈ <b>6082,12 cm²</b></div>
+      <div>V = <span class="frac"><span>4</span><span>3</span></span>π · 22³ ≈ <b>44 602,24 cm³</b></div>
+    </div>
+    <p class="note">La esfera es la única que <b>no tiene desarrollo plano exacto</b>: su superficie no se puede aplanar sin deformarla. Se aproxima con “gajos” (husos), como un balón. Curiosidad (Arquímedes): su área es igual a la lateral del cilindro que la envuelve: 2πr · 2r = 4πr².</p>
+  </div>
+</div>
+
+<h3>Conclusiones de la exploración</h3>
+<ul>
+  <li><b>Área</b> = superficie que cubre el cuerpo (cm²); se obtiene sumando las figuras planas de su desarrollo. <b>Volumen</b> = espacio que ocupa (cm³).</li>
+  <li>Prismas y cilindros: V = A<sub>b</sub>·h (capas apiladas, punto 2). Pirámides y conos ocupan exactamente <b>un tercio</b> del prisma o cilindro con la misma base y altura: se comprueba llenando el cono con arroz y vaciándolo 3 veces en el cilindro.</li>
+  <li>Dos cuerpos pueden tener el mismo volumen y distinta área (p. ej., prisma recto y oblicuo de igual base y altura).</li>
+  <li>En los sólidos compuestos el volumen se suma, pero en el área solo cuentan las superficies que quedan expuestas.</li>
+</ul>
+
+<h3>Resumen de resultados</h3>
+<table class="summary">
+  <tr><th>Ejercicio</th><th>Sólido</th><th>Resultado</th></tr>
+  <tr><td>2.1</td><td>Ortoedro 5 × 3 × 4</td><td>60 cm³</td></tr>
+  <tr><td>2.2</td><td>Cilindro r = 3, h = 5</td><td>45π ≈ 141,37 cm³</td></tr>
+  <tr><td>3.1</td><td>Pirámide 25 × 10, h = 12</td><td>1000 cm³</td></tr>
+  <tr><td>3.2</td><td>Cono r = 5, h = 18</td><td>150π ≈ 471,24 cm³</td></tr>
+  <tr><td>3.3</td><td>Cilindro r = 6, h = 12</td><td>432π ≈ 1357,17 cm³</td></tr>
+  <tr><td>3.4</td><td>Esfera r = 22</td><td>≈ 44 602,24 cm³</td></tr>
+  <tr><td>3.5</td><td>Ortoedro 6 × 2 × 1</td><td>12 cm³</td></tr>
+  <tr><td>3.6</td><td>Prisma pentagonal oblicuo</td><td>275 cm³</td></tr>
+  <tr><td>4a</td><td>Semiesfera + cono</td><td>33π ≈ 103,67 cm³</td></tr>
+  <tr><td>4b</td><td>Cilindro + cono</td><td>336π ≈ 1055,58 cm³</td></tr>
+</table>
+
+<h3>Anexo: fórmulas usadas en el taller</h3>
+<table>
+  <tr><th>Cuerpo</th><th>Volumen</th><th>Área lateral</th><th>Área total</th></tr>
+  <tr><td>Prisma (recto u oblicuo)</td><td>V = A<sub>b</sub> · h</td><td>Perímetro<sub>b</sub> · h (recto)</td><td>A<sub>L</sub> + 2A<sub>b</sub></td></tr>
+  <tr><td>Ortoedro / cubo</td><td>V = a·b·c &nbsp;/&nbsp; V = a³</td><td>2(a+b)·c</td><td>2(ab+ac+bc) &nbsp;/&nbsp; 6a²</td></tr>
+  <tr><td>Pirámide</td><td>V = <span class="frac"><span>1</span><span>3</span></span> A<sub>b</sub> · h</td><td><span class="frac"><span>Perímetro<sub>b</sub> · ap</span><span>2</span></span> (regular)</td><td>A<sub>L</sub> + A<sub>b</sub></td></tr>
+  <tr><td>Cilindro</td><td>V = π r² h</td><td>2π r h</td><td>2π r (h + r)</td></tr>
+  <tr><td>Cono</td><td>V = <span class="frac"><span>1</span><span>3</span></span> π r² h</td><td>π r g, &nbsp; g = √(r² + h²)</td><td>π r (g + r)</td></tr>
+  <tr><td>Esfera</td><td>V = <span class="frac"><span>4</span><span>3</span></span> π r³</td><td>—</td><td>4π r²</td></tr>
+</table>
+<p class="note">Notación: A<sub>b</sub> = área de la base, h = altura, r = radio, g = generatriz, ap = apotema. Se usa π ≈ 3,1416 y los resultados se dan en forma exacta (con π) y aproximada.</p>
+
+
+</body>
+</html>
