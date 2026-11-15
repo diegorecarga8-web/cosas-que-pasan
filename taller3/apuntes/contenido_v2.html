@@ -1,0 +1,342 @@
+<!-- Contenido de la versión reorganizada y parafraseada. la marca fig se reemplaza por el dibujo. -->
+
+<!-- @@HOJA -->
+<div class="col">
+  <h1>Taller 3 · Corte 3</h1>
+  <p class="blue" style="margin-top:-1mm">Pensamiento Lógico · cuerpos geométricos</p>
+  <h2>1. Ideas básicas</h2>
+  <p>Un cuerpo geométrico es una figura que ocupa lugar en el espacio: tiene largo, ancho y alto.</p>
+  <ul>
+    <li><b>Poliedros:</b> solo tienen caras planas, que son polígonos (prismas, pirámides, cubo).</li>
+    <li><b>Cuerpos redondos:</b> tienen por lo menos una parte curva (cilindro, cono, esfera).</li>
+  </ul>
+  <div class="box tilt1"><b>Relación de Euler</b> (en todo poliedro):<br>
+  <span class="red">caras + vértices − aristas = 2</span></div>
+  <p class="note">si sumo caras y vértices y le quito las aristas, siempre da 2</p>
+</div>
+<div class="col">
+  <h3 style="margin-top:0">Prisma de base hexagonal <span class="blue">(1a)</span></h3>
+  <div class="row">
+    {{fig:hex}}
+    <div class="t"><ul>
+      <li>Las 2 bases son hexágonos idénticos, uno frente al otro.</li>
+      <li>Los costados son 6 rectángulos.</li>
+      <li><b>8 caras · 18 aristas · 12 vértices</b></li>
+      <li>Euler: 8 + 12 − 18 = 2 ✓</li>
+      <li>V = A<sub>base</sub> · h</li>
+    </ul></div>
+  </div>
+  <h3>Cubo o hexaedro regular <span class="blue">(1d)</span></h3>
+  <div class="row">
+    {{fig:cube}}
+    <div class="t"><ul>
+      <li>Lo forman 6 cuadrados del mismo tamaño.</li>
+      <li><b>6 caras · 12 aristas · 8 vértices</b></li>
+      <li>Euler: 6 + 8 − 12 = 2 ✓</li>
+      <li>Todas sus aristas miden lo mismo (a).</li>
+      <li>V = a³ · Área = 6a²</li>
+    </ul></div>
+  </div>
+</div>
+
+<!-- @@HOJA -->
+<div class="col">
+  <h2 style="margin-top:0">2. Volumen de los prismas</h2>
+  <div class="box tilt1">Cavalieri: si armo un sólido con capas iguales,<br>
+  <span class="red">volumen = lo que mide una capa × número de capas</span></div>
+  <h3>Prisma hecho con cubitos <span class="blue">(2.1)</span></h3>
+  <div class="row">
+    {{fig:cubitos}}
+    <div class="t">
+      <p><b>a)</b> Con 4 capas de 5 × 3 cubitos sale un <b>prisma rectangular</b> (ortoedro) de 5 × 3 × 4 cm.</p>
+    </div>
+  </div>
+  <p><b>b)</b> una capa = 5 · 3 = 15 cubitos = 15 cm³</p>
+  <p>cuatro capas → 15 · 4 = 60 cm³</p>
+  <p class="small">verifico: 5 · 3 · 4 = 60 ✓</p>
+  <span class="res">V = 60 cm³</span>
+</div>
+<div class="col">
+  <h3 style="margin-top:0">Caja de 6 × 2 × 1 cm <span class="blue">(3.5)</span></h3>
+  <div class="row">
+    {{fig:box}}
+    <div class="t">
+      <p>V = largo · ancho · alto</p>
+      <p>V = 6 · 2 · 1</p>
+      <span class="res">V = 12 cm³</span>
+    </div>
+  </div>
+  <h3>Prisma pentagonal inclinado <span class="blue">(3.6)</span></h3>
+  <p class="small">base: pentágono de lado 4 cm y apotema 2,75 cm · altura 10 cm</p>
+  <div class="row">
+    {{fig:penta}}
+    <div class="t">
+      <p>perímetro = 5 · 4 = 20 cm</p>
+      <p>A<sub>b</sub> = <span class="frac"><span>20 · 2,75</span><span>2</span></span> = 27,5 cm²</p>
+      <p>V = 27,5 · 10</p>
+      <span class="res">V = 275 cm³</span>
+    </div>
+  </div>
+  <p class="note">aunque esté ladeado uso la altura vertical (10), no la arista inclinada</p>
+</div>
+
+<!-- @@HOJA -->
+<div class="col">
+  <h2 style="margin-top:0">3. Las pirámides</h2>
+  <h3>Pirámide de base cuadrada <span class="blue">(1b)</span></h3>
+  <div class="row">
+    {{fig:sqpyr}}
+    <div class="t"><ul>
+      <li>La base es un cuadrado.</li>
+      <li>4 triángulos que se unen arriba en la <b>cúspide</b>.</li>
+      <li><b>5 caras · 8 aristas · 5 vértices</b></li>
+      <li>Euler: 5 + 5 − 8 = 2 ✓</li>
+      <li>V = <span class="frac"><span>1</span><span>3</span></span> A<sub>base</sub> · h</li>
+    </ul></div>
+  </div>
+  <h3>Pirámide de 25 × 10 cm y altura 12 <span class="blue">(3.1)</span></h3>
+  <div class="row">
+    {{fig:rectpyr}}
+    <div class="t">
+      <p>A<sub>b</sub> = 25 · 10 = 250 cm²</p>
+      <p>V = <span class="frac"><span>1</span><span>3</span></span> · 250 · 12</p>
+      <span class="res">V = 1000 cm³</span>
+    </div>
+  </div>
+</div>
+<div class="col">
+  <h3 style="margin-top:0">Al abrir esa pirámide <span class="blue">(5)</span></h3>
+  <p>Queda el rectángulo de la base rodeado de 4 triángulos.</p>
+  <div class="row">
+    {{fig:net_pyr}}
+  </div>
+  <p>Altura de cada triángulo (Pitágoras):</p>
+  <p>lado 25 → √(12² + 5²) = √169 = 13</p>
+  <p>lado 10 → √(12² + 12,5²) ≈ 17,33</p>
+  <p>A<sub>L</sub> = 325 + 173,28 = 498,28 cm²</p>
+  <p>A = 498,28 + 250</p>
+  <span class="res">A ≈ 748,28 cm²</span>
+</div>
+
+<!-- @@HOJA -->
+<div class="col">
+  <h2 style="margin-top:0">4. El cilindro</h2>
+  <h3>Cómo es <span class="blue">(1e)</span></h3>
+  <div class="row">
+    {{fig:cyl}}
+    <div class="t"><ul>
+      <li>2 bases circulares iguales y paralelas.</li>
+      <li>El costado es curvo; si lo desenrollo es un rectángulo.</li>
+      <li>No tiene vértices ni aristas rectas.</li>
+      <li>Sale de girar un rectángulo sobre un lado.</li>
+      <li>V = π r² h</li>
+    </ul></div>
+  </div>
+  <h3>Discos apilados <span class="blue">(2.2)</span></h3>
+  <p class="small">cada disco: radio 3 cm, grosor 1 cm, base 9π cm²</p>
+  <div class="row">
+    {{fig:discos}}
+    <div class="t">
+      <p><b>a)</b> 5 discos forman un <b>cilindro</b> de r = 3 y h = 5.</p>
+      <p><b>b)</b> un disco = 9π · 1 = 9π</p>
+      <p>cinco → 9π · 5 = 45π</p>
+      <span class="res">V = 45π ≈ 141,37 cm³</span>
+    </div>
+  </div>
+</div>
+<div class="col">
+  <h3 style="margin-top:0">Cilindro de radio 6 y altura 12 <span class="blue">(3.3)</span></h3>
+  <div class="row">
+    {{fig:cyl2}}
+    <div class="t">
+      <p>V = π · 6² · 12</p>
+      <p>V = π · 36 · 12</p>
+      <span class="res">V = 432π ≈ 1357,17 cm³</span>
+    </div>
+  </div>
+  <h3>Al abrirlo <span class="blue">(5)</span></h3>
+  <div class="row">
+    {{fig:net_cyl}}
+  </div>
+  <p class="small">2 círculos + rectángulo de 2πr × h (≈ 37,7 × 12)</p>
+  <p>A<sub>L</sub> = 2π · 6 · 12 = 144π · bases = 72π</p>
+  <span class="res">A = 216π ≈ 678,58 cm²</span>
+</div>
+
+<!-- @@HOJA -->
+<div class="col">
+  <h2 style="margin-top:0">5. El cono</h2>
+  <h3>Cómo es <span class="blue">(1c)</span></h3>
+  <div class="row">
+    {{fig:cone}}
+    <div class="t"><ul>
+      <li>1 base circular y un costado curvo.</li>
+      <li>Termina en 1 vértice (cúspide), sin aristas rectas.</li>
+      <li>Elementos: radio <b>r</b>, altura <b>h</b> y generatriz <b>g</b> (de la punta al borde).</li>
+      <li>Sale de girar un triángulo rectángulo sobre un cateto.</li>
+      <li>V = <span class="frac"><span>1</span><span>3</span></span> π r² h</li>
+    </ul></div>
+  </div>
+  <p class="note">el cono es al cilindro lo que la pirámide es al prisma</p>
+  <h3>Cono de radio 5 y altura 18 <span class="blue">(3.2)</span></h3>
+  <div class="row">
+    {{fig:cone2}}
+    <div class="t">
+      <p>V = <span class="frac"><span>1</span><span>3</span></span> π · 25 · 18</p>
+      <p>V = <span class="frac"><span>450π</span><span>3</span></span></p>
+      <span class="res">V = 150π ≈ 471,24 cm³</span>
+    </div>
+  </div>
+</div>
+<div class="col">
+  <h3 style="margin-top:0">Al abrirlo <span class="blue">(5)</span></h3>
+  <p>Queda un sector circular (como una porción de pizza) y el círculo de la base.</p>
+  <div class="row">
+    {{fig:net_cone}}
+  </div>
+  <p>g = √(5² + 18²) = √349 ≈ 18,68</p>
+  <p>abertura = 360° · <span class="frac"><span>5</span><span>18,68</span></span> ≈ 96,3°</p>
+  <p>A<sub>L</sub> = π · 5 · 18,68 ≈ 293,45</p>
+  <p>base = 25π ≈ 78,54</p>
+  <span class="res">A ≈ 371,99 cm²</span>
+</div>
+
+<!-- @@HOJA -->
+<div class="col">
+  <h2 style="margin-top:0">6. La esfera</h2>
+  <h3>Cómo es <span class="blue">(1f)</span></h3>
+  <div class="row">
+    {{fig:sphere}}
+    <div class="t"><ul>
+      <li>Una sola superficie curva y cerrada.</li>
+      <li>Todos sus puntos están a la misma distancia del centro (el radio).</li>
+      <li>Sin caras planas, aristas ni vértices.</li>
+      <li>Sale de girar un semicírculo sobre su diámetro.</li>
+      <li>V = <span class="frac"><span>4</span><span>3</span></span> π r³ · A = 4π r²</li>
+    </ul></div>
+  </div>
+  <h3>¿De dónde salen los redondos?</h3>
+  {{fig:gen}}
+  <p class="note">giro una figura plana una vuelta completa alrededor de la línea roja</p>
+</div>
+<div class="col">
+  <h3 style="margin-top:0">Esfera de radio 22 <span class="blue">(3.4)</span></h3>
+  <div class="row">
+    {{fig:sph2}}
+    <div class="t">
+      <p>22³ = 10 648</p>
+      <p>V = <span class="frac"><span>4</span><span>3</span></span> π · 10 648</p>
+      <p>V = <span class="frac"><span>42 592</span><span>3</span></span> π</p>
+      <span class="res">V ≈ 44 602,24 cm³</span>
+    </div>
+  </div>
+  <p>A = 4π · 22² = 1936π</p>
+  <span class="res">A ≈ 6082,12 cm²</span>
+  <p class="note">la esfera no se puede abrir y dejar plana sin deformarla; se arma con gajos, como un balón</p>
+</div>
+
+<!-- @@HOJA -->
+<div class="col">
+  <h2 style="margin-top:0">7. Cuerpos combinados</h2>
+  <p class="note" style="margin-top:0">calculo cada pieza por separado y sumo</p>
+  <h3>Media esfera sobre un cono <span class="blue">(4a)</span></h3>
+  <p class="small">radio 3 para las dos piezas · cono de 5 de alto</p>
+  <div class="row">
+    {{fig:hemicone}}
+    <div class="t">
+      <p>media esfera: <span class="frac"><span>2</span><span>3</span></span> π · 27 = <b>18π</b></p>
+      <p>cono: <span class="frac"><span>1</span><span>3</span></span> π · 9 · 5 = <b>15π</b></p>
+      <p>suma: 18π + 15π = 33π</p>
+      <span class="res">V = 33π ≈ 103,67 cm³</span>
+    </div>
+  </div>
+</div>
+<div class="col">
+  <h3 style="margin-top:0">Cilindro con un cono debajo <span class="blue">(4b)</span></h3>
+  <p class="small">diámetro 12 → <b>radio 6</b> · cilindro 8 de alto · cono 4</p>
+  <div class="row">
+    {{fig:cylcone}}
+    <div class="t">
+      <p>cilindro: π · 36 · 8 = <b>288π</b></p>
+      <p>cono: <span class="frac"><span>1</span><span>3</span></span> π · 36 · 4 = <b>48π</b></p>
+      <p>suma: 336π</p>
+      <span class="res">V = 336π ≈ 1055,58 cm³</span>
+    </div>
+  </div>
+  <h3>Extra: superficie</h3>
+  <p class="small">solo cuenta lo de afuera; la base que comparten queda escondida</p>
+  <p><b>4a)</b> 18π + 3√34 · π ≈ <span class="red">111,50 cm²</span></p>
+  <p><b>4b)</b> 36π + 96π + 6π√52 ≈ <span class="red">550,62 cm²</span></p>
+</div>
+
+<!-- @@HOJA -->
+<div class="col">
+  <h2 style="margin-top:0">8. Construir los cuerpos</h2>
+  <p>La idea es armar cada cuerpo en cartulina a partir de su <b>desarrollo plano</b> (lo que queda al desdoblarlo sobre la mesa).</p>
+  <ul>
+    <li><b>Área:</b> cuánto papel lo cubre por fuera (cm²).</li>
+    <li><b>Volumen:</b> cuánto cabe adentro (cm³).</li>
+  </ul>
+  <h3>Pasos</h3>
+  <ul>
+    <li>Materiales: cartulina, regla, escuadra, compás, transportador, tijeras y pegante.</li>
+    <li>1. Trazar el desarrollo con sus medidas (a la mitad si no cabe).</li>
+    <li>2. Dejar pestañas de 1 cm para pegar.</li>
+    <li>3. Recortar, marcar dobleces, doblar y pegar.</li>
+    <li>4. Comprobar el volumen llenándolo con arroz (1 cm³ = 1 mL).</li>
+  </ul>
+</div>
+<div class="col">
+  <h3 style="margin-top:0">Caja 6 × 2 × 1 abierta</h3>
+  <div class="row">
+    {{fig:net_box}}
+    <div class="t">
+      <p class="small">2 de 6×2 · 2 de 6×1 · 2 de 2×1</p>
+      <p>A = 2(12 + 6 + 2)</p>
+      <span class="res">A = 40 cm²</span>
+    </div>
+  </div>
+  <h3>Prisma pentagonal abierto</h3>
+  <div class="row">
+    {{fig:net_penta}}
+    <div class="t">
+      <p class="small">5 rectángulos 4×10 + 2 pentágonos</p>
+      <p>200 + 55</p>
+      <span class="res">A = 255 cm²</span>
+    </div>
+  </div>
+  <p class="note">si lo armo inclinado: más área, pero el mismo volumen (275 cm³)</p>
+</div>
+
+<!-- @@HOJA -->
+<div class="col">
+  <h2 style="margin-top:0">Lo que aprendí</h2>
+  <ul>
+    <li>Prismas y cilindros: <b>V = A<sub>base</sub> · h</b>, porque son capas apiladas.</li>
+    <li>Pirámides y conos son <b>un tercio</b> del prisma o cilindro con la misma base y altura: con 3 conos llenos de arroz lleno el cilindro.</li>
+    <li>Dos cuerpos pueden tener el mismo volumen y distinta área (prisma recto e inclinado).</li>
+    <li>En los combinados el volumen se suma; el área solo cuenta lo de afuera.</li>
+  </ul>
+  <h3>Errores que no debo cometer</h3>
+  <ul>
+    <li>Usar el diámetro como si fuera el radio (4b).</li>
+    <li>Olvidar el <span class="frac"><span>1</span><span>3</span></span> en pirámides y conos.</li>
+    <li>Usar la arista inclinada en vez de la altura.</li>
+    <li>Confundir cm² (área) con cm³ (volumen).</li>
+  </ul>
+</div>
+<div class="col">
+  <h2 style="margin-top:0">Resultados</h2>
+  <ul>
+    <li><b>Cubitos 5×3×4</b> (2.1): 60 cm³</li>
+    <li><b>Caja 6×2×1</b> (3.5): 12 cm³ · 40 cm²</li>
+    <li><b>Prisma pentagonal</b> (3.6): 275 cm³ · 255 cm²</li>
+    <li><b>Pirámide 25×10</b> (3.1): 1000 cm³ · ≈ 748,28 cm²</li>
+    <li><b>Discos r 3, h 5</b> (2.2): 45π ≈ 141,37 cm³</li>
+    <li><b>Cilindro r 6, h 12</b> (3.3): 432π ≈ 1357,17 cm³ · 216π ≈ 678,58 cm²</li>
+    <li><b>Cono r 5, h 18</b> (3.2): 150π ≈ 471,24 cm³ · ≈ 371,99 cm²</li>
+    <li><b>Esfera r 22</b> (3.4): ≈ 44 602,24 cm³ · ≈ 6082,12 cm²</li>
+    <li><b>Media esfera + cono</b> (4a): 33π ≈ 103,67 cm³</li>
+    <li><b>Cilindro + cono</b> (4b): 336π ≈ 1055,58 cm³</li>
+  </ul>
+</div>
