@@ -22,7 +22,8 @@ FIGS = {
     'cubitos': (8, F.fig_cubitos), 'discos': (9, F.fig_discos), 'rectpyr': (10, F.fig_rectpyr),
     'cone2': (11, F.fig_cone2), 'cyl2': (12, F.fig_cyl2), 'sph2': (13, F.fig_sph2), 'box': (14, F.fig_box),
     'penta': (15, F.fig_penta), 'hemicone': (16, F.fig_hemicone), 'cylcone': (17, F.fig_cylcone),
-    'net_box': (18, F.net_box), 'net_cyl': (19, F.net_cyl),
+    'net_box': (18, F.net_box), 'net_cyl': (19, F.net_cyl), 'gen': (6, F.fig_gen),
+    'net_cone': (20, F.net_cone), 'net_pyr': (21, F.net_pyr), 'net_penta': (22, F.net_penta),
 }
 COLOCAR = [
     ('hoja1', 'hex', (95, 350, 360, 830)), ('hoja1', 'sqpyr', (95, 990, 375, 1330)),
@@ -41,6 +42,8 @@ FILTROS = '''<svg width="0" height="0" style="position:absolute"><defs>
 <filter id="rough" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/></filter>
 <filter id="gr" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="2" seed="9" result="g"/><feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  2.4 0 0 0 -0.45" result="ga"/><feComposite in="SourceGraphic" in2="ga" operator="in"/><feGaussianBlur stdDeviation="0.5"/></filter>
 </defs></svg>'''
+BASE = 1500
+SALIDA = AQUI
 NODE = r'''
 const {chromium}=require('playwright');
 (async()=>{const [html,out,ids]=process.argv.slice(2);const b=await chromium.launch();
@@ -66,7 +69,7 @@ def main(trabajo):
     for hoja, n, (x0, y0, x1, y1) in COLOCAR:
         if hoja not in fotos:
             fotos[hoja] = Image.open(UP / FOTOS[hoja]).convert('RGB')
-        ph = fotos[hoja]; k = ph.width / 1500
+        ph = fotos[hoja]; k = ph.width / BASE
         x0, y0, x1, y1 = [round(v * k) for v in (x0, y0, x1, y1)]
         d = Image.open(trabajo / f'{n}.png').convert('RGBA')
         d = d.crop(d.getchannel('A').point(lambda v: 255 if v > 8 else 0).getbbox())
@@ -79,7 +82,7 @@ def main(trabajo):
         zona = ph.crop((ox, oy, ox + d.width, oy + d.height))
         ph.paste(ImageChops.multiply(zona, capa), (ox, oy))
     for hoja, ph in fotos.items():
-        ph.save(AQUI / f'{hoja}_con_dibujos.jpg', quality=92)
+        ph.save(SALIDA / f'{hoja}_con_dibujos.jpg', quality=92)
         print('ok', hoja)
 
 if __name__ == '__main__':
